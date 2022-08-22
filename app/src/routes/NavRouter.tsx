@@ -1,18 +1,14 @@
 import {Route, Switch} from "react-router-dom"
 import Explore from "../pages/Explore/Explore";
+import Home from "../pages/Home/Home";
 import Products from "../pages/Products/Products";
 
 const NavRouter = () => {
   return (
     <Switch>
-      <Route path="/explore">
-        <Explore />
-      </Route>
-
-      <Route path="/products">
-        <Products />
-      </Route>
-
+      <Route path="/" exact component={Home} />
+      <Route path="/explore" component={Explore} />
+      <Route path="/products" component={Products} />
     </Switch>
   )
 } 
