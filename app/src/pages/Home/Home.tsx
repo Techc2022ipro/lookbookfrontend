@@ -1,7 +1,9 @@
+import {LookbookAbout} from "./HomeData";
+
 const Home = () => {
   return (
     <div>
-      This is the home page
+      { LookbookAbout }
     </div>
   )
 }
