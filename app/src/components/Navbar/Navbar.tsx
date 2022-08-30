@@ -10,11 +10,11 @@ const Navbar = () => {
       <ul className="navLinks">
         <Searchbar />
         <li className="navLink">
-          <Link to = "/">Home</Link>
+          <Link to = "/">Explore</Link>
         </li>
 
         <li className="navLink">
-          <Link to = "/explore">Explore</Link>
+          <Link to = "/feeds">Feeds</Link>
         </li>
 
         <li className="navLink">
