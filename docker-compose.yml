@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: loginFrontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./app:/app
+    environment:
+      NODE_ENV: development
+    tty: true
