@@ -1,9 +1,12 @@
+import axios from "axios";
 import React, {useState} from "react";
+import {useCookies} from "react-cookie";
 
 const Login = () => {
   // also have to make a signup page
   const [identifier, setIdentifier] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [cookie, setCookie] = useCookies(['authToken']);
   const handleIdentifier = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIdentifier(e.target.value);
   }
@@ -12,8 +15,17 @@ const Login = () => {
     setPassword(e.target.value);
   }
 
+  const loginAction = async() => {
+    await axios.post("http://localhost:8000/login" , {
+      identifier, 
+      password
+    }).then((res) => {
+      setCookie('authToken',res.data.token);
+    });
+  }
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    loginAction();
   }
 
   return (
