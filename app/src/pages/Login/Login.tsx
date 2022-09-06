@@ -7,6 +7,7 @@ const Login = () => {
   const [identifier, setIdentifier] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [cookie, setCookie] = useCookies(['authToken']);
+
   const handleIdentifier = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIdentifier(e.target.value);
   }
