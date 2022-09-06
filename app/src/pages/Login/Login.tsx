@@ -16,14 +16,14 @@ const Login = () => {
 
   const postData = async () => {
     await axios.post("http://localhost:8000/login", {
-      email: identifier,
-      password: password
+      identifier,
+      password
     });
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    postData().then(res => { console.log(res) });
+    postData();
   }
 
   return (
