@@ -21,7 +21,7 @@ const Login = () => {
       identifier, 
       password
     }).then((res) => {
-      setCookie('authToken',res.data.token);
+      setCookie("authToken", res.data.accessToken);
     });
   }
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
