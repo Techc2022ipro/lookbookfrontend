@@ -5,7 +5,12 @@ import {useCookies} from "react-cookie";
 const Feeds = () => {
   const [cookie] = useCookies(['authToken']);
   const fetchData = async () => {
-    await axios.get("http://localhost:2000/feeds", {headers:{ 'auth': cookie.authToken } });
+
+    await axios.get("http://localhost:2000/feeds", 
+      {
+        headers:{ 'auth': cookie.authToken }, 
+        withCredentials: true 
+      });
   }
 
   useEffect(() => {
