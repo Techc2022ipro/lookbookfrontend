@@ -1,25 +1,27 @@
-import axios from "axios";
-import {useEffect} from "react";
-import {useCookies} from "react-cookie";
+import Cookies from "js-cookie";
+import {useEffect, useState} from "react";
+import {Redirect} from "react-router-dom";
+import Requests from "../../Requests/Requests";
 
 const Feeds = () => {
-  const [cookie] = useCookies(['authToken']);
-  const fetchData = async () => {
 
-    await axios.get("http://localhost:2000/feeds", 
-      {
-        headers:{ 'auth': cookie.authToken }, 
-        withCredentials: true 
-      });
+  const [userFeeds, setUserFeeds] = useState(null);
+
+  const fetchData = async () => {
+      const userFeeds = await Requests.getWithCredentials("http://localhost:2000/feeds");
+      setUserFeeds(userFeeds);
   }
 
-  useEffect(() => {
+    useEffect(() => {
     fetchData();
   }, []);
 
+  if(!Cookies.get("authToken")) return (<Redirect to="/login" />)
   return (
     <div>
-      this is the feeds page
+      {
+        userFeeds
+      }
     </div>
   )
 }

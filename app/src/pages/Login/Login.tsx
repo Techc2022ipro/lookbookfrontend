@@ -1,12 +1,14 @@
-import axios from "axios";
+import Cookies from "js-cookie";
 import React, {useState} from "react";
-import {useCookies} from "react-cookie";
+import {Redirect, useHistory} from "react-router-dom";
+import Requests from "../../Requests/Requests";
 
 const Login = () => {
   // also have to make a signup page
+  let history = useHistory();
   const [identifier, setIdentifier] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [cookie, setCookie] = useCookies(['authToken']);
+  if(Cookies.get("authToken")) return (<Redirect to="/feeds" />)
 
   const handleIdentifier = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIdentifier(e.target.value);
@@ -17,16 +19,18 @@ const Login = () => {
   }
 
   const loginAction = async() => {
-    await axios.post("http://localhost:8000/login" , {
+    const setCookie = await Requests.post("http://localhost:8000/login" , {
       identifier, 
       password
-    }).then((res) => {
-      setCookie("authToken", res.data.accessToken);
     });
+    Cookies.set("authToken", setCookie.accessToken);
+    return setCookie;
   }
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    loginAction();
+    const isSetCookie = await loginAction();
+    window.location.reload();
+    if(isSetCookie) return (history.push("/feeds"));
   }
 
   return (
