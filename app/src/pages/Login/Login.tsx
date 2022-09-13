@@ -14,7 +14,7 @@ const Login = () => {
     setIdentifier(e.target.value);
   }
 
-  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+ const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   }
 
@@ -25,7 +25,7 @@ const Login = () => {
     });
     Cookies.set("authToken", setCookie.accessToken);
     return setCookie;
-  }
+  }  
   const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const isSetCookie = await loginAction();

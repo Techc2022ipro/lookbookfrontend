@@ -7,11 +7,12 @@ import Searchbar from "../SearchBar/Searchbar";
 
 const Navbar = () => {
   const [username, setUsername] = useState(null);
-
+  const [role, setRole] = useState(null);
   const fetchData = async () => {
     if(Cookies.get("authToken")) {
       const productData = await Requests.getWithCredentials("http://localhost:2000/getCreds");
       setUsername(productData.username);
+      setRole(productData.role);
     } 
   }
   useEffect(() => {
@@ -37,15 +38,29 @@ const Navbar = () => {
         <li className="navLink">
           <Link to = "/feeds">Feeds</Link>
         </li>
-        <li className="navLink">
-          {username ?
-          <Link to = "/logout" onClick={handleLogout}>logout</Link>
+
+        {
+          role ? //if roler is seller navbar should have upload items page if buyer should have cart page link else null 
+            role === "Seller" ? 
+          <li className="navLink">
+            <Link to = "/upload">Upload Items</Link>
+          </li>
           :
-          <>
-          <Link to = "/login">Login</Link>
-            /
-          <Link to = "/signup">Signup</Link>
-          </>
+          <li className="navLink">
+            <Link to = "/cart">Cart</Link>
+          </li>
+          : null
+        }
+        <li className="navLink">
+          {
+            username ?
+              <Link to = "/logout" onClick={handleLogout}>logout</Link>
+              :
+              <div>
+              <Link to = "/login">Login</Link>
+                /
+              <Link to = "/signup">Signup</Link>
+          </div>
           }
         </li>
       </ul>
