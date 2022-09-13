@@ -1,5 +1,5 @@
-import axios from "axios";
 import {useEffect, useState} from "react";
+import Requests from "../../Requests/Requests";
 import {Product} from "../../response-types/ResponseTypes";
 
 const Explore = () => {
@@ -7,8 +7,8 @@ const Explore = () => {
   const [data, setData] = useState<Product[] | null>(null);
 
   const fetchData = async () => {
-    const productData = await axios.get("http://localhost:2000")
-    setData(productData.data);
+    const productData = await Requests.get("http://localhost:2000");
+    setData(productData);
   }
   useEffect(() => {
     fetchData();
