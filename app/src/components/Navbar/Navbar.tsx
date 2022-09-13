@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import {useEffect, useState} from "react";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 import Requests from "../../Requests/Requests";
 import NavRouter from "../../routes/NavRouter";
 import Searchbar from "../SearchBar/Searchbar";
@@ -17,6 +17,11 @@ const Navbar = () => {
   useEffect(() => {
     fetchData();
   },[])
+  const handleLogout = () => {
+    Cookies.remove("authToken");
+    window.location.reload();
+    return (<Redirect to="/login" />)
+  }
   return (
     <Router>      
       {
@@ -34,9 +39,13 @@ const Navbar = () => {
         </li>
         <li className="navLink">
           {username ?
-          <Link to = "/login">logout</Link>
+          <Link to = "/logout" onClick={handleLogout}>logout</Link>
           :
+          <>
           <Link to = "/login">Login</Link>
+            /
+          <Link to = "/signup">Signup</Link>
+          </>
           }
         </li>
       </ul>
