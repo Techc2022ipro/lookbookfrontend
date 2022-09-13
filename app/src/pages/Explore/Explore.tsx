@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 import Requests from "../../Requests/Requests";
 import {Product} from "../../response-types/ResponseTypes";
 
@@ -13,17 +14,20 @@ const Explore = () => {
   useEffect(() => {
     fetchData();
   },[])
+  const constructSellerLink = (name: string): string => {
+   return name.split(" ").join("").toLowerCase();
+  }
 
   return (
     <div>
       {
         data ? data.map(product => (
           <div> 
-            <p>{product.name}</p>
-            <p>{product.seller}</p>
-            <p>{product.description}</p>
+            <p>name: {product.name}</p>
+            <p>seller: <Link to={constructSellerLink(product.seller)}>{product.seller}</Link></p>
+            <p>description: {product.description}</p>
+            <br/>
           </div>
-
         )) : "no data"
       }
     </div>
