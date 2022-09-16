@@ -6,7 +6,7 @@ const Signup = ()=>{
   const [email,setEmail]=useState<string>("");
   const [password,setPassword]=useState<string>("");
   const [confirmPassword,setConfirmPassword]=useState<string>("");
-  const [option,setOption]=useState<string>("");
+
   const handleUsername=(e:React.ChangeEvent<HTMLInputElement>)=>{
     setUsername(e.target.value);
   }
@@ -19,20 +19,19 @@ const Signup = ()=>{
   const handleConfirmPassword=(e:React.ChangeEvent<HTMLInputElement>)=>{
     setConfirmPassword(e.target.value);
   }
-  const handleOption=(e:React.ChangeEvent<HTMLSelectElement>)=>{
-    setOption(e.target.value);
-  }
+
   const signupAction=async()=>{
     const sinupResponse=await Requests.post('http://localhost:8000/signup',{
       username,
       email,
       password,
       confirmPassword,
-      option
     });
     console.log(sinupResponse);
   }
+
   const handleSubmit=(e:React.FormEvent<HTMLFormElement>)=>{
+    e.preventDefault();
     signupAction();
   }
 
@@ -42,10 +41,6 @@ const Signup = ()=>{
       <input type="email" placeholder="Enter your email" onChange={handleEmail} value={email}/>
       <input type="password" placeholder="Enter your password" onChange={handlePassword} value={password}/>
       <input type="password" placeholder="Enter confirm password" onChange={handleConfirmPassword} value={confirmPassword}/>
-      <select  onChange={handleOption} value={option}>
-        <option value="Seller">Seller</option>
-        <option value="Buyer">Buyer</option>
-      </select>
       <button type="submit">
         signup
       </button>
