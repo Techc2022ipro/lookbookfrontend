@@ -16,7 +16,6 @@ const Feeds = () => {
     fetchData();
   }, []);
 
-  if(!Cookies.get("authToken")) return (<Redirect to="/login" />)
   return (
     <div>
       {
