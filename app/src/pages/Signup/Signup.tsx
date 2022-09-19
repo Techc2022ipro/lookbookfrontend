@@ -1,4 +1,6 @@
 import React, { useState } from "react"
+import {Redirect} from "react-router-dom";
+import Auth from "../../Requests/Auth";
 import Requests from "../../Requests/Requests";
 
 const Signup = ()=>{
@@ -21,13 +23,12 @@ const Signup = ()=>{
   }
 
   const signupAction=async()=>{
-    const sinupResponse=await Requests.post('http://localhost:8000/signup',{
+    await Requests.post('http://localhost:8000/signup',{
       username,
       email,
       password,
       confirmPassword,
     });
-    console.log(sinupResponse);
   }
 
   const handleSubmit=(e:React.FormEvent<HTMLFormElement>)=>{
