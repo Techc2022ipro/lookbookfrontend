@@ -1,11 +1,15 @@
 import React, {useState} from "react";
-import {Redirect, useHistory} from "react-router-dom";
+import {Redirect} from "react-router-dom";
+import Auth from "../../Requests/Auth";
 import Requests from "../../Requests/Requests";
 
 const Login = () => {
-  // also have to make a signup page
+
+  const [verified, setVerified] = useState<Boolean>(false);
   const [identifier, setIdentifier] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+
+  Auth().then(res => setVerified(res));
 
   const handleIdentifier = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIdentifier(e.target.value);
@@ -16,16 +20,19 @@ const Login = () => {
   }
 
   const loginAction = async() => {
-    const setCookie = await Requests.post("http://localhost:8000/login" , {
+    await Requests.post("http://localhost:8000/login" , {
       identifier, 
       password
     });
-    return setCookie;
   }  
+
   const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const isSetCookie = await loginAction();
+    await loginAction();
+    window.location.reload();
   }
+  
+  if(verified) return (<Redirect to="/feeds" />);
 
   return (
     <div>
