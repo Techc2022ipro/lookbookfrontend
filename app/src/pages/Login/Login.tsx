@@ -1,15 +1,15 @@
-import React, {useState} from "react";
+import React, {useEffect,useState} from "react";
 import {Redirect} from "react-router-dom";
-import Auth from "../../Requests/Auth";
 import Requests from "../../Requests/Requests";
 
 const Login = () => {
-
   const [verified, setVerified] = useState<Boolean>(false);
   const [identifier, setIdentifier] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  Auth().then(res => setVerified(res));
+  useEffect(() => {
+    Requests.auth().then(res => setVerified(res.isVerified));
+  }, []);
 
   const handleIdentifier = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIdentifier(e.target.value);

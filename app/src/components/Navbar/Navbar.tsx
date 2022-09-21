@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import Auth from "../../Requests/Auth";
 import Requests from "../../Requests/Requests";
 import NavRouter from "../../routes/NavRouter";
 import Searchbar from "../SearchBar/Searchbar";
@@ -9,14 +8,12 @@ const Navbar = () => {
   const [verified, setVerified] = useState<Boolean>(false);
   const [username, setUsername] = useState(null);
 
-  Auth().then(res => setVerified(res));
 
-  const fetchData = async () => {
-      const productData = await Requests.getWithCredentials("http://localhost:2000/getCreds");
-      setUsername(productData.username);
-  }
   useEffect(() => {
-    if(verified) fetchData();
+    Requests.auth().then(res => {
+      setVerified(res.isVerified)
+      if(verified) setUsername(res.data.username)
+    });
   },[verified])
 
   const handleLogout = async () => {
