@@ -12,7 +12,7 @@ const Navbar = () => {
   useEffect(() => {
     Requests.auth().then(res => {
       setVerified(res.isVerified)
-      setUsername(res.data.username)
+      if(verified) setUsername(res.data.username)
     });
   },[verified])
 
