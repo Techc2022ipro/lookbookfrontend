@@ -1,4 +1,5 @@
 @import url('./components/Navbar/Navbar.css');
+@import url('./components/Image/Image.css');
 
 body {
   margin: 0;
