@@ -3,7 +3,10 @@ export type Product = {
   name: string,
   brand: string,
   description: string,
-  seller: string
+  quantity: string,
+  price: string,
+  uid: string,
+  image: string
 }
 
 export type LoginCredentials = {
