@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import Image from "../../components/Image/Image";
 import Requests from "../../Requests/Requests";
 import {Product} from "../../response-types/ResponseTypes";
 
@@ -21,7 +22,10 @@ const Explore = () => {
           <div> 
             <p><strong>name</strong>: {product.name}</p>
             <p><strong>description</strong>: {product.description}</p>
-            <img src = {`https://ipro-develop-bucket.s3.ap-northeast-1.amazonaws.com/${product.image}`} />
+            <Image
+              image = {product.image}
+              class = "secondary"
+            />
             <br/>
           </div>
         )) : "no data"
