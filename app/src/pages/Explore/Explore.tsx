@@ -5,11 +5,17 @@ import {Product} from "../../response-types/ResponseTypes";
 
 const Explore = () => {
 
-  const [data, setData] = useState<Product[] | null>(null);
+  const [data, setData] = useState<Product[]>([]);
 
   const fetchData = async () => {
     const productData = await Requests.get("http://localhost:2000/");
     setData(productData);
+  }
+
+  const limitlessScrolling = async () => {
+    const cursor = data ? data[data.length - 1].pid : 0;
+    const productData = await Requests.get(`http://localhost:2000/?cursor=${cursor}}`)
+      setData(old => [...old, ...productData]);
   }
   useEffect(() => {
     fetchData();
@@ -20,6 +26,7 @@ const Explore = () => {
       {
         data ? data.map(product => (
           <div> 
+            <p><strong>name</strong>: {product.pid}</p>
             <p><strong>name</strong>: {product.name}</p>
             <p><strong>description</strong>: {product.description}</p>
             <Image
@@ -30,6 +37,7 @@ const Explore = () => {
           </div>
         )) : "no data"
       }
+            <button onClick={limitlessScrolling}>see more</button>
     </div>
   )
 }
