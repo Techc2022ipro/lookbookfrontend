@@ -1,5 +1,5 @@
 import {ProductModalType} from "../../response-types/ResponseTypes";
-import Image from "../Image/Image";
+import Image from "../../common-components/Image/Image";
 
 const ProductModal = (props: ProductModalType) => {
   return (
