@@ -1,0 +1,3 @@
+[submodule "app/src/common-components"]
+	path = app/src/common-components
+	url = git@github.com:Techc2022ipro/common-components.git

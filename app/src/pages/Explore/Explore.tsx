@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import Image from "../../components/Image/Image";
+import Image from "../../common-components/Image/Image";
 import ProductModal from "../../components/ProductModal/ProductModal";
 import Requests from "../../Requests/Requests";
 import {Product} from "../../response-types/ResponseTypes";
