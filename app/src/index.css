@@ -1,5 +1,7 @@
 @import url('./components/Navbar/Navbar.css');
 @import url('./components/Image/Image.css');
+@import url('./components/ProductModal/ProductModal.css');
+@import url('./pages/Explore/Explore.css');
 
 body {
   margin: 0;

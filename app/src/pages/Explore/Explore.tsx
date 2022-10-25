@@ -1,11 +1,14 @@
 import {useEffect, useState} from "react";
 import Image from "../../components/Image/Image";
+import ProductModal from "../../components/ProductModal/ProductModal";
 import Requests from "../../Requests/Requests";
 import {Product} from "../../response-types/ResponseTypes";
 
 const Explore = () => {
 
   const [data, setData] = useState<Product[]>([]);
+  const [isOpen, setIsOpen] = useState<Boolean>(false);
+  const [productModal, setProductModal] = useState<Product>();
 
   const fetchData = async () => {
     const productData = await Requests.get("http://localhost:2000/");
@@ -17,6 +20,7 @@ const Explore = () => {
     const productData = await Requests.get(`http://localhost:2000/?cursor=${cursor}}`)
       setData(old => [...old, ...productData]);
   }
+  
   useEffect(() => {
     fetchData();
   },[])
@@ -24,9 +28,29 @@ const Explore = () => {
   return (
     <div>
       {
+        isOpen && productModal ? 
+          <div>
+          <ProductModal 
+          pid={productModal.pid} 
+          uid={productModal.uid}
+          name={productModal.name}
+          brand={productModal.brand}
+          quantity={productModal.quantity}
+          price={productModal.price}
+          description={productModal.description}
+          image={productModal.image}
+          onClose={setIsOpen}
+        /> 
+        </div>
+
+            : null 
+      }
+      {
         data ? data.map(product => (
-          <div> 
-            <p><strong>name</strong>: {product.pid}</p>
+          <div key={product.pid} onClick={() => {
+            setProductModal(product);
+            setIsOpen(!isOpen);
+            }}> 
             <p><strong>name</strong>: {product.name}</p>
             <p><strong>description</strong>: {product.description}</p>
             <Image
