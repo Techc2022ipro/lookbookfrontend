@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import Requests from "../../Requests/Requests";
+import Requests, {Url} from "../../Requests/Requests";
 import NavRouter from "../../routes/NavRouter";
 import Searchbar from "../SearchBar/Searchbar";
 
@@ -17,7 +17,7 @@ const Navbar = () => {
   },[verified])
 
   const handleLogout = async () => {
-    await Requests.getWithCredentials("http://localhost:8000/logout");
+    await Requests.getWithCredentials(Url.AUTH, "logout");
     window.location.reload();
  }
 

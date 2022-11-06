@@ -1,6 +1,6 @@
 import React, {useEffect,useState} from "react";
 import {Redirect} from "react-router-dom";
-import Requests from "../../Requests/Requests";
+import Requests, {Url} from "../../Requests/Requests";
 
 const Login = () => {
   const [verified, setVerified] = useState<Boolean>(false);
@@ -20,7 +20,7 @@ const Login = () => {
   }
 
   const loginAction = async() => {
-    await Requests.post("http://localhost:8000/login" , {
+    await Requests.post(Url.AUTH, "login" , {
       identifier, 
       password
     });
