@@ -4,7 +4,7 @@ import Image from "../../common-components/Image/Image";
 const ProductModal = (props: ProductModalType) => {
   return (
     <div className="productModal">
-      <div className="container">
+      <div className="productContainer">
         <button onClick={()=> props.onClose(false)}>close</button>
         <Image
           image = {props.image}
