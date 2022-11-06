@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import Requests from "../../Requests/Requests";
+import Requests, {Url} from "../../Requests/Requests";
 
 const Signup = ()=>{
   const [username,setUsername]=useState<string>("");
@@ -21,7 +21,7 @@ const Signup = ()=>{
   }
 
   const signupAction=async()=>{
-    await Requests.post('http://localhost:8000/signup',{
+    await Requests.post(Url.AUTH, 'signup',{
       username,
       email,
       password,

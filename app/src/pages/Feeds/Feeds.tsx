@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import Requests from "../../Requests/Requests";
+import Requests, {Url} from "../../Requests/Requests";
 import RequireLogin from "../../components/RequireLogin/RequireLogin";
 
 const Feeds = () => {
@@ -8,7 +8,7 @@ const Feeds = () => {
 
 
   const fetchData = async () => {
-      const userFeeds = await Requests.getWithCredentials("http://localhost:2000/feeds");
+      const userFeeds = await Requests.getWithCredentials(Url.PRODUCT, "feeds");
       setUserFeeds(userFeeds);
   }
 

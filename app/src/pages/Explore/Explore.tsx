@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import Image from "../../common-components/Image/Image";
 import ProductModal from "../../components/ProductModal/ProductModal";
-import Requests from "../../Requests/Requests";
+import Requests, {Url} from "../../Requests/Requests";
 import {Product} from "../../response-types/ResponseTypes";
 
 const Explore = () => {
@@ -11,13 +11,13 @@ const Explore = () => {
   const [productModal, setProductModal] = useState<Product>();
 
   const fetchData = async () => {
-    const productData = await Requests.get("http://localhost:2000/");
+    const productData = await Requests.get(Url.PRODUCT, "");
     setData(productData);
   }
 
   const limitlessScrolling = async () => {
     const cursor = data ? data[data.length - 1].pid : 0;
-    const productData = await Requests.get(`http://localhost:2000/?cursor=${cursor}}`)
+    const productData = await Requests.get(Url.PRODUCT, `?cursor=${cursor}}`)
       setData(old => [...old, ...productData]);
   }
   
