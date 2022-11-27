@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import Requests, {Url} from "../../Requests/Requests";
+import Requests, {Url} from "../../requests/Requests";
 import NavRouter from "../../routes/NavRouter";
 import Searchbar from "../SearchBar/Searchbar";
 

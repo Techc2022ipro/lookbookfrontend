@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {SearchQuery} from "../../entities/Search";
-import Requests, {Url} from "../../Requests/Requests";
+import Requests, {Url} from "../../requests/Requests";
 
 const Searchbar = (props: SearchQuery) => {
   const [keyword, setKeyword] = useState<string>("")

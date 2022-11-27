@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import Image from "../../common-components/Image/Image";
 import ProductModal from "../../components/ProductModal/ProductModal";
-import Requests, {Url} from "../../Requests/Requests";
+import Requests, {Url} from "../../requests/Requests";
 import {Product} from "../../response-types/ResponseTypes";
 
 const Explore = () => {
