@@ -1,8 +1,8 @@
 import {Route, Switch} from "react-router-dom"
 import Login from "../common-components/Login/Login";
+import Signup from "../common-components/Signup/Signup";
 import Explore from "../pages/Explore/Explore";
 import Feeds from "../pages/Feeds/Feeds";
-import Signup from "../pages/Signup/Signup";
 
 const NavRouter = () => {
   return (
@@ -10,7 +10,7 @@ const NavRouter = () => {
       <Route path="/" exact component={Explore} />
       <Route path="/feeds" component={Feeds} />
       <Route path="/login" component={Login} />
-      <Route path="/Signup" component={Signup} />
+      <Route path="/signup" component={Signup} />
     </Switch>
   )
 } 
