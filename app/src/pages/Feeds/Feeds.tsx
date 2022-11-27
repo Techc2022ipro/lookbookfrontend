@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import Requests, {Url} from "../../requests/Requests";
-import RequireLogin from "../../components/RequireLogin/RequireLogin";
+import Login from "../../common-components/Login/Login";
 
 const Feeds = () => {
   const [verified, setVerified] = useState<Boolean>(false);
@@ -25,7 +25,7 @@ const Feeds = () => {
       verified ?
         userFeeds
       :
-        <RequireLogin />
+        <Login />
       }
     </div>
   )

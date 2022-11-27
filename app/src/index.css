@@ -1,7 +1,9 @@
 @import url('./components/Navbar/Navbar.css');
 @import url('./common-components/Image/Image.css');
+@import url('./common-components/Login/Login.css');
 @import url('./components/ProductModal/ProductModal.css');
 @import url('./pages/Explore/Explore.css');
+@import url('./common-components/customHtmlComponents/Button/Button.css');
 
 body {
   margin: 0;
@@ -16,3 +18,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+:root {
+  --form-border: 1px solid rgba(0,0,0,0.5);
+  --input-width: 500px;
+  --input-height: 40px;
+  --input-radius: 10px;
+  --form-font-color: rgba(0,0,0,0.5);
+  --link-color: #4361ee;
+}
+.section {
+  height: 100vh;
+}
+
+.form-section {
+  height: 100vh;
+  display: flex;
+  flex-direction: center;
+  align-items: center;
+}
+
+
