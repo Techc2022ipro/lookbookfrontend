@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import Requests, {Url} from "../../Requests/Requests";
+import Requests, {Url} from "../../requests/Requests";
 
 const Signup = ()=>{
   const [username,setUsername]=useState<string>("");

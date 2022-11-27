@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import Requests, {Url} from "../../Requests/Requests";
+import Requests, {Url} from "../../requests/Requests";
 import RequireLogin from "../../components/RequireLogin/RequireLogin";
 
 const Feeds = () => {
