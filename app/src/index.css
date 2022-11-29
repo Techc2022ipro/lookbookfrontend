@@ -5,6 +5,8 @@
 @import url('./components/ProductModal/ProductModal.css');
 @import url('./pages/Explore/Explore.css');
 @import url('./common-components/customHtmlComponents/Button/Button.css');
+@import url('./common-components/ProductCard/ProcudtCard.css');
+
 
 body {
   margin: 0;
@@ -30,12 +32,15 @@ code {
 }
 .section {
   height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .form-section {
   height: 100vh;
   display: flex;
-  flex-direction: center;
+  justify-content: center;
   align-items: center;
 }
 

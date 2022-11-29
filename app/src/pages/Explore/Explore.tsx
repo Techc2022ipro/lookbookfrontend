@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import Image from "../../common-components/Image/Image";
+import ProductCard from "../../common-components/ProductCard/ProductCard";
 import ProductModal from "../../components/ProductModal/ProductModal";
 import Requests, {Url} from "../../requests/Requests";
 import {Product} from "../../response-types/ResponseTypes";
@@ -25,6 +26,12 @@ const Explore = () => {
     fetchData();
   },[])
 
+  if(!data) {
+    return (
+      <div>no data</div>
+    )
+  }
+
   return (
     <div>
       {
@@ -46,20 +53,23 @@ const Explore = () => {
             : null 
       }
       {
-        data ? data.map(product => (
+        data.map(product => (
           <div key={product.pid} onClick={() => {
             setProductModal(product);
             setIsOpen(!isOpen);
-            }}> 
-            <p><strong>name</strong>: {product.name}</p>
-            <p><strong>description</strong>: {product.description}</p>
-            <Image
-              image = {product.image}
-              class = "secondary"
+          }}> 
+
+            <ProductCard 
+              uid={product.uid}
+              username={product.username}
+              image={product.image}
+              description={product.description}
+              date={product.createdAt}
+              tags={product.tags}
             />
             <br/>
           </div>
-        )) : "no data"
+        ))
       }
             <button onClick={limitlessScrolling}>see more</button>
     </div>
