@@ -2,8 +2,7 @@ import {useEffect, useState} from "react";
 import Requests, {Url} from "../../requests/Requests";
 import Login from "../../common-components/Login/Login";
 
-const Feeds = () => {
-  const [verified, setVerified] = useState<Boolean>(false);
+const Feeds = (props: {verified: Boolean}) => {
   const [userFeeds, setUserFeeds] = useState(null);
 
 
@@ -13,19 +12,17 @@ const Feeds = () => {
   }
 
   useEffect(() => {
-    Requests.auth().then(res => setVerified(res.isVerified));
-    if(verified) { fetchData() };
-  }, [verified]);
+    fetchData() 
+  }, []);
 
-
+  if(!props.verified) {
+    return (<Login path="/feeds" />)
+  }
 
   return (
     <div>
       {
-      verified ?
         userFeeds
-      :
-        <Login />
       }
     </div>
   )
