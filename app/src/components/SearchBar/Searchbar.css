@@ -1,0 +1,13 @@
+.search-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.searchbarInput{
+    outline: none;
+    height: 30px;
+    border-radius: 5px;
+    width: 95%;
+}
+

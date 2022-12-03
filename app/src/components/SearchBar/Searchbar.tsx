@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import Button from "../../common-components/customHtmlComponents/Button/Button";
 import {SearchQuery} from "../../entities/Search";
 import Requests, {Url} from "../../requests/Requests";
 
@@ -11,8 +12,9 @@ const Searchbar = (props: SearchQuery) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="search-box">
         <input 
+          className="searchbarInput"
           type="text" 
           value={keyword}
           placeholder="Search" 
@@ -20,7 +22,12 @@ const Searchbar = (props: SearchQuery) => {
             setKeyword(e.target.value)
           }}
         />
-        <button>Search</button>
+        <Button 
+        type="submit" 
+        value="Search"
+        class="secondary" />
+
+        
       </form>
     </div>
   )
