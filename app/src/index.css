@@ -41,6 +41,13 @@ code {
   justify-content: center;
 }
 
+.productSection {
+  height:80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .form-section {
   height: 100vh;
   display: flex;

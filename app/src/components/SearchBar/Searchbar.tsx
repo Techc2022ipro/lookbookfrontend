@@ -25,7 +25,7 @@ const Searchbar = (props: SearchQuery) => {
         <Button 
         type="submit" 
         value="Search"
-        class="secondary" />
+        class="secondaryBtn" />
 
         
       </form>

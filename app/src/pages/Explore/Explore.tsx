@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react";
-import Image from "../../common-components/Image/Image";
 import ProductCard from "../../common-components/ProductCard/ProductCard";
 import ProductModal from "../../components/ProductModal/ProductModal";
 import Requests, {Url} from "../../requests/Requests";
