@@ -6,7 +6,11 @@
 @import url('./pages/Explore/Explore.css');
 @import url('./common-components/customHtmlComponents/Button/Button.css');
 @import url('./common-components/ProductCard/ProcudtCard.css');
-
+@import url('./components/SearchBar/Searchbar.css');
+*{
+  padding: 0;
+  margin: 0;
+}
 
 body {
   margin: 0;

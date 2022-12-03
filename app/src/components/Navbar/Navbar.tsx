@@ -1,6 +1,6 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import Requests, {Url} from "../../requests/Requests";
+import Requests, { Url } from "../../requests/Requests";
 import NavRouter from "../../routes/NavRouter";
 import Searchbar from "../SearchBar/Searchbar";
 
@@ -12,63 +12,66 @@ const Navbar = () => {
   useEffect(() => {
     Requests.auth().then(res => {
       setVerified(res.isVerified)
-      if(verified) setUsername(res.data.username)
+      if (verified) setUsername(res.data.username)
     });
-  },[verified])
+  }, [verified])
 
   const handleLogout = async () => {
     await Requests.getWithCredentials(Url.AUTH, "logout");
     window.location.reload();
- }
+  }
 
 
   return (
-    <Router>      
+    <Router>
       {
         username ? username : null
       }
       <div className="navbar">
-        <h2 className="logo">Lookbook</h2>
-        <ul className="navLinks">
-          <div>
-            <Searchbar 
-              slug={search}
-            />
-            <input 
-              type="button" 
-              value="name" 
-              onClick = {() => {
-                setSearch("name");
-              }}
-            />
-            <input 
-              type="button" 
-              value="type"  
-              onClick = {() => {
-                setSearch("type");
-              }}
-            />
+        <div className="navItems">
+          <Searchbar
+            slug={search}
+          />
+          <div className="filters">
+          <input
+            type="button"
+            value="name"
+            className="filterButton"
+            onClick={() => {
+              setSearch("name");
+            }}
+          />
+
+          <input
+            type="button"
+            value="type"
+            className="filterButton"
+            onClick={() => {
+              setSearch("type");
+            }}
+          />
           </div>
 
-          <li className="navLink">
-            <Link to = "/">Explore</Link>
-          </li>
-          <li className="navLink">
-            <Link to = "/feeds">Feeds</Link>
-          </li>
+          <ul className="linkBox">
+            <li className="navLink" >
+              <Link to="/" className="link">Explore</Link>
+            </li>
+            <li className="navLink">
+              <Link to="/feeds" className="link">Feeds</Link>
+            </li>
 
-          {
-            verified ? 
-              <button onClick={handleLogout}>logout</button>
-              :
-              <li className="navLink">
-                <Link to = "/login">Login</Link>
-                /
-                <Link to = "/signup">Signup</Link>
-              </li>
-          }
-        </ul>
+            {
+              verified ?
+                <button onClick={handleLogout} >logout</button>
+                :
+                <li className="navLink" >
+                  <Link to="/login" className="link">Login</Link>
+                </li>
+            }
+          </ul>
+        </div>
       </div>
+
       <NavRouter />
     </Router>
   )
