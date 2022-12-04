@@ -2,7 +2,6 @@
 @import url('./common-components/Image/Image.css');
 @import url('./common-components/Signup/Signup.css');
 @import url('./common-components/Login/Login.css');
-@import url('./components/ProductModal/ProductModal.css');
 @import url('./pages/Explore/Explore.css');
 @import url('./common-components/customHtmlComponents/Button/Button.css');
 @import url('./common-components/ProductCard/ProcudtCard.css');
@@ -42,7 +41,6 @@ code {
 }
 
 .productSection {
-  height:80vh;
   display: flex;
   align-items: center;
   justify-content: center;
