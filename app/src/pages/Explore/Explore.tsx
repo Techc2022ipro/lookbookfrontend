@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
 import ProductCard from "../../common-components/ProductCard/ProductCard";
-import ProductModal from "../../components/ProductModal/ProductModal";
 import Requests, {Url} from "../../requests/Requests";
 import {Product} from "../../response-types/ResponseTypes";
 
@@ -33,31 +32,12 @@ const Explore = () => {
 
   return (
     <div>
-      {
-        isOpen && productModal ? 
-          <div>
-          <ProductModal 
-          pid={productModal.pid} 
-          uid={productModal.uid}
-          name={productModal.name}
-          brand={productModal.brand}
-          quantity={productModal.quantity}
-          price={productModal.price}
-          description={productModal.description}
-          image={productModal.image}
-          onClose={setIsOpen}
-        /> 
-        </div>
-
-            : null 
-      }
-      {
+           {
         data.map(product => (
           <div key={product.pid} onClick={() => {
             setProductModal(product);
             setIsOpen(!isOpen);
           }}> 
-
             <ProductCard 
               uid={product.uid}
               username={product.username}

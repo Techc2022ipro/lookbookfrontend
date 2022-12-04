@@ -22,12 +22,6 @@ const Searchbar = (props: SearchQuery) => {
             setKeyword(e.target.value)
           }}
         />
-        <Button 
-        type="submit" 
-        value="Search"
-        class="secondaryBtn" />
-
-        
       </form>
     </div>
   )
