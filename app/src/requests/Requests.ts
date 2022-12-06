@@ -2,6 +2,10 @@ import axios, {AxiosResponse} from "axios";
 
 const responseBody = (response: AxiosResponse) => response.data;
 
+axios.interceptors.response.use(undefined, error=>{
+  throw error.response.statusText
+})
+
 export enum Url { PRODUCT, AUTH };
 
 const baseUrl = (requestFor: Url): string => {

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import Requests, { Url } from "../../requests/Requests";
 import NavRouter from "../../routes/NavRouter";
 import Searchbar from "../SearchBar/Searchbar";
+//these are the icons used in navbar
 import {GiHamburgerMenu} from "react-icons/gi";
 import {FaRegWindowClose} from "react-icons/fa";
 
@@ -10,16 +11,18 @@ import {FaRegWindowClose} from "react-icons/fa";
 const Navbar = () => {
   const [verified, setVerified] = useState<Boolean>(false);
   const [username, setUsername] = useState(null);
-  const [search, setSearch] = useState<string>("type");
-  const [isOpen, setIsOpen] = useState<Boolean>(false);
 
+  //this is for the current state of navbar
+  const [isOpen, setIsOpen] = useState<Boolean>(false);
   Requests.auth().then(res => {
     setVerified(res.isVerified)
     if (verified) setUsername(res.data.username)
   });
 
+// this is to get the navbar DOM-element from the jsx below
 const toggle = document.querySelector(".navbar")
 
+// this is for toggling the navbar
 if(isOpen) {
   toggle?.classList.remove("closeNav")
   toggle?.classList.add("activeNav")
@@ -42,19 +45,15 @@ return (
       />
       <h1 className="logo">Look-Book </h1>
     </div>
-    {
-      username ? username : null
-    }
     <div className="navbar">
       <FaRegWindowClose
         className="toggleClose" 
         onClick={()=>{setIsOpen(!isOpen)}}
         color="white"
       />
+    { username ? <h3 className="navbarUsername">{username}</h3> : null }
       <div className="navItems">
-        <Searchbar
-          slug={search}
-        />
+        <Searchbar />
 
         <ul className="linkBox">
           <li className="navLink" >
@@ -66,7 +65,7 @@ return (
 
           {
             verified ?
-              <button onClick={handleLogout} >logout</button>
+              <p className="link" onClick={handleLogout} >logout</p>
               :
               <li className="navLink" >
                 <Link to="/login" className="link">Login</Link>
@@ -75,7 +74,6 @@ return (
         </ul>
       </div>
     </div>
-
     <NavRouter />
   </Router>
 )
