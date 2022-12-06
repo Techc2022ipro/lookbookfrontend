@@ -1,13 +1,12 @@
 import React, {useState} from "react";
-import Button from "../../common-components/customHtmlComponents/Button/Button";
-import {SearchQuery} from "../../entities/Search";
 import Requests, {Url} from "../../requests/Requests";
 
-const Searchbar = (props: SearchQuery) => {
+const Searchbar = () => {
   const [keyword, setKeyword] = useState<string>("")
+
   const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    Requests.post(Url.PRODUCT, `search/${props.slug}`, {keyword});
+    Requests.post(Url.PRODUCT, `search/`, {keyword});
   }
 
   return (

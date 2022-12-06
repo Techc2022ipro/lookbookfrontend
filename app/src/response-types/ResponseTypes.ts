@@ -33,6 +33,7 @@ export type LoginCredentials = {
 
 export type ProductCard = {
   uid: string
+  pid: number
   username: string
   tags: string[]
   image: string
