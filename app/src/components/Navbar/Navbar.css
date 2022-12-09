@@ -41,12 +41,12 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  width: 0px;
   height: 100%;
+  width:300px;
   top: 0;
-  left: 0;
+  left: -300px;
   visibility: hidden;
-  transition: 0.5s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 .navbarUsername {
@@ -57,12 +57,12 @@
   font-size: 2em;
 }
 .closeNav {
-  width: 0px;
+  left: -300px;
   visibility: hidden;
 }
 
 .activeNav {
-  width: 300px;
+  left: 0px;
   visibility: visible;
 }
 
