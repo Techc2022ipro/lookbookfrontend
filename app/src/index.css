@@ -60,6 +60,28 @@ code {
   background-color: rgba(242, 70, 70);
   border-radius: 10px;
   margin-bottom: 10px;
+  animation: fadein 0.8s ease-in-out;
 }
+
+.message {
+  color: white;
+  padding:20px;
+  background-color: green;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  animation: fadein 0.8s ease-in-out;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+
 
 
