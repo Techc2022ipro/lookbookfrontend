@@ -5,7 +5,6 @@ import Login from "../../common-components/Login/Login";
 const Feeds = (props: {verified: Boolean}) => {
   const [userFeeds, setUserFeeds] = useState(null);
 
-
   const fetchData = async () => {
       const userFeeds = await Requests.getWithCredentials(Url.PRODUCT, "feeds");
       setUserFeeds(userFeeds);

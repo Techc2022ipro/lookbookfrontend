@@ -40,3 +40,13 @@ export type ProductCard = {
   description: string
   date: Date
 }
+
+export type Profile = {
+  uid: number,
+  firstName: string,
+  lastName: string,
+  profilePic: string | null,
+  address: string | null,
+  phoneNo: string | null,
+  tags: string[]
+}

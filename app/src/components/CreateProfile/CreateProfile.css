@@ -1,0 +1,5 @@
+.tag-box {
+  display: flex;
+  width: 80%;
+  justify-content: space-evenly;
+}

@@ -62,6 +62,9 @@ return (
           <li className="navLink">
             <Link to="/feeds" className="link">Feeds</Link>
           </li>
+          <li className="navLink">
+            <Link to="/profile" className="link">Profile</Link>
+          </li>
 
           {
             verified ?
