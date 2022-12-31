@@ -6,6 +6,9 @@
 @import url('./common-components/customHtmlComponents/Button/Button.css');
 @import url('./common-components/ProductCard/ProcudtCard.css');
 @import url('./components/SearchBar/Searchbar.css');
+@import url('./pages/Tags/Tags.css');
+@import url('./components/CreateProfile/CreateProfile.css');
+
 *{
   padding: 0;
   margin: 0;
@@ -59,6 +62,19 @@ code {
   background-color: rgba(242, 70, 70);
   border-radius: 10px;
   margin-bottom: 10px;
+  animation: fadein 0.8s ease-in-out;
+}
+
+.warning-banner {
+  color: white;
+  width: 150px;
+  text-align: center;
+  padding: 20px;
+  background-color: darkgoldenrod;
+  border-radius: 10px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
   animation: fadein 0.8s ease-in-out;
 }
 
