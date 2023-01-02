@@ -1,3 +1,11 @@
 .closeBtn { 
   z-index: 1;
 }
+
+
+.empty-data {
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

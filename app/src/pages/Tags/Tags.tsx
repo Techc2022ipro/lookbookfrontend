@@ -7,6 +7,7 @@ import {Product} from "../../response-types/ResponseTypes";
 const Tags = () => {
   const  { slug }  = useParams() as { slug: string };
   const [data, setData] = useState<Product[]>([]);
+  const [verified, setVerified] = useState<Boolean>(false);
 
   const fetchData = async() => {
     const productData = await Requests.get(Url.PRODUCT, `tag/${slug}`);
@@ -15,7 +16,8 @@ const Tags = () => {
 
   useEffect(() => {
     fetchData();
-  },[slug]);
+    Requests.auth().then(res => setVerified(res.isVerified));
+  },[slug, verified]);
 
   return( 
     <div>
@@ -24,13 +26,8 @@ const Tags = () => {
         data.map(product => (
           <div key={product.pid}>
             <ProductCard
-              pid = {product.pid}
-              uid = {product.uid}
-              username = {product.username}
-              image = {product.image}
-              description = {product.description}
-              date = {product.createdAt}
-              tags={product.tags}
+              product={product}
+              hasComment={verified}
             />
           </div>
         ))

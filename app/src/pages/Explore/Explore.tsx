@@ -6,6 +6,7 @@ import {Product} from "../../response-types/ResponseTypes";
 const Explore = () => {
 
   const [data, setData] = useState<Product[]>([]);
+  const [verified, setVerified] = useState<Boolean>(false);
 
   const fetchData = async () => {
     const productData = await Requests.get(Url.PRODUCT, "");
@@ -20,11 +21,13 @@ const Explore = () => {
 
 useEffect(() => {
   fetchData();
-},[])
+  Requests.auth().then(res => setVerified(res.isVerified));
+},[verified])
 
-if(!data) {
+
+if(data.length <= 0) {
   return (
-    <div>no data</div>
+    <div className="empty-data"> Nothing to see here 🐔. </div>
   )
 }
 
@@ -34,13 +37,8 @@ return (
       data.map(product => (
         <div key={product.pid}> 
           <ProductCard 
-            pid={product.pid}
-            uid={product.uid}
-            username={product.username}
-            image={product.image}
-            description={product.description}
-            date={product.createdAt}
-            tags={product.tags}
+            product={product}
+            hasComment={verified}
           />
           <br/>
         </div>
