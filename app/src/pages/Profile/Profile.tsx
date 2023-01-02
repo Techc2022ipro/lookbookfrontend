@@ -7,40 +7,59 @@ import { Profile as UserProfile } from "../../response-types/ResponseTypes";
 
 const Profile = (props: {verified: Boolean}) => {
 
-  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [userProfile, setUserProfile] = useState<UserProfile>();
+  const [message, setMessage] = useState<string | null>(null);
 
   const fetchProfile = async() => {
-    await Requests.getWithCredentials(Url.AUTH, "profile").catch(err => {setError(err)}).then(data => {
-      if(data) {
-        setUserProfile(data);
-      }
-    });
+    const profile = await Requests.getWithCredentials(Url.AUTH, "profile");
+    if(profile.message) {
+      setMessage(profile.message)
+    } else {
+      setUserProfile(profile)
+    }
   }
 
   useEffect(() => {
     fetchProfile();
-  },[])
+  },[props.verified])
+
 
   if(!props.verified) {
     return (<Login path="/profile" />);
   }
+
+  if(!userProfile) {
+    return <CreateProfile />
+  }
+
+  // set profile picture
+  const ProfilePicture = () => {
+    if (!userProfile.profilePic) {
+      return (
+        <div className="sample-profile-pic"></div>
+      )
+    }
+    return (
+      <Image class="profile-pic" image={userProfile.profilePic} />
+    )
+  }
+
   return (
     <div>
-      { error ? <p className="warning-banner">
-        <strong onClick={()=>{setError(null);}} className="close-banner">x</strong>  
-        {error}
+      { message ? <p className="warning-banner">
+        <strong onClick={()=>{setMessage(null);}} className="close-banner">x</strong>  
+        {message}
       </p> : null}
-      {userProfile && userProfile.profilePic ? 
-      <Image class="profile-pic" image={userProfile.profilePic} /> 
-      : <div className="sample-profile-pic"></div>
-      }
-      {userProfile ?  
+      <ProfilePicture />
         <div>
         <p>{userProfile.firstName} {userProfile.lastName}</p>
         <p>{userProfile.phoneNo}</p>
+          {
+            userProfile.tags.map(tag => (
+              <p key={tag}>{tag}</p>
+            ))
+          }
         </div>
-      : <CreateProfile />}
     </div>
   )
 }

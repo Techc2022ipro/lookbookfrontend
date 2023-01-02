@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import Requests, { Url } from "../../requests/Requests";
 import NavRouter from "../../routes/NavRouter";
@@ -7,16 +7,18 @@ import Searchbar from "../SearchBar/Searchbar";
 import {GiHamburgerMenu} from "react-icons/gi";
 import {FaRegWindowClose} from "react-icons/fa";
 
-
 const Navbar = () => {
   const [verified, setVerified] = useState<Boolean>(false);
-  const [username, setUsername] = useState(null);
+  const [username, setUsername] = useState<string>("");
 
   //this is for the current state of navbar
   const [isOpen, setIsOpen] = useState<Boolean>(false);
+
   Requests.auth().then(res => {
     setVerified(res.isVerified)
-    if (verified) setUsername(res.data.username)
+    if (verified){
+      setUsername(res.data.username);
+    } 
   });
 
 // this is to get the navbar DOM-element from the jsx below
@@ -31,10 +33,34 @@ if(isOpen) {
   toggle?.classList.remove("activeNav")
 }
 
+
 const handleLogout = async () => {
   await Requests.getWithCredentials(Url.AUTH, "logout");
   window.location.reload();
 }
+
+const Username = () => {
+  if(username === "") return null;
+  return (
+    <h3 className="navbarUsername">
+        <Link to="/profile" className="link">{username}</Link>
+    </h3> 
+  )
+};
+
+const Logout = () => {
+  if(!verified) {
+    return (
+        <Link to="/login" className="link">Login</Link>
+    )
+  }
+  return (
+    <p className="link" onClick={handleLogout}>logout</p>
+  )
+}
+
+useEffect( () => {
+},[verified])
 
 return (
   <Router>
@@ -51,7 +77,8 @@ return (
         onClick={()=>{setIsOpen(!isOpen)}}
         color="white"
       />
-    { username ? <h3 className="navbarUsername">{username}</h3> : null }
+      <Username/>
+
       <div className="navItems">
         <Searchbar />
 
@@ -62,18 +89,9 @@ return (
           <li className="navLink">
             <Link to="/feeds" className="link">Feeds</Link>
           </li>
-          <li className="navLink">
-            <Link to="/profile" className="link">Profile</Link>
+          <li className="navLink" >
+            <Logout />
           </li>
-
-          {
-            verified ?
-              <p className="link" onClick={handleLogout} >logout</p>
-              :
-              <li className="navLink" >
-                <Link to="/login" className="link">Login</Link>
-              </li>
-          }
         </ul>
       </div>
     </div>
