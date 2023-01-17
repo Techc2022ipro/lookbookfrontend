@@ -27,6 +27,7 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
 
     - name: Build, tag, and push image to Amazon ECR
+      working-directory: docker/
       run: |
         docker build -t lookbook docker/
         docker tag lookbook:latest ${{ secrets.ECR_REPO }}
