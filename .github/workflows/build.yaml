@@ -28,6 +28,6 @@ jobs:
 
     - name: Build, tag, and push image to Amazon ECR
       run: |
-        docker build -t lookbook .
+        docker build -t lookbook docker/
         docker tag lookbook:latest ${{ secrets.ECR_REPO }}
         docker push ${{ secrets.ECR_REPO }}
