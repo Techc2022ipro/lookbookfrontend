@@ -1,8 +1,6 @@
 FROM node:14
 WORKDIR /app
-COPY ./app /
-COPY ./app/src/package.* /
-COPY . .
+COPY ../app .
 COPY ./scripts/ /scripts
 RUN chmod +x /scripts/*
 EXPOSE 3000
