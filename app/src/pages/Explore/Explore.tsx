@@ -1,9 +1,9 @@
 import {useEffect, useState} from "react";
-import ProductCard from "../../common-components/ProductCard/ProductCard";
 import Requests, {Url} from "../../requests/Requests";
 import {Product} from "../../response-types/ResponseTypes";
+import ProductCard from "../../common-components/ProductCard/ProductCard";
 
-const Explore = () => {
+const Explore = (props: {verified:Boolean}) => {
 
   const [data, setData] = useState<Product[]>([]);
   const [verified, setVerified] = useState<Boolean>(false);
@@ -37,8 +37,8 @@ return (
       data.map(product => (
         <div key={product.pid}> 
           <ProductCard 
-            product={product}
-            hasComment={verified}
+            product = {product}
+            hasComment={props.verified}
           />
           <br/>
         </div>

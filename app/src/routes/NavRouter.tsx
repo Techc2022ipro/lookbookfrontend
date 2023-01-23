@@ -17,12 +17,12 @@ const NavRouter = () => {
 
   return (
     <Switch>
-      <Route path="/" exact component={Explore} />
+      <Route path="/" exact component={()=> <Explore verified={verified} />} />
       <Route path="/feeds" component={()=> <Feeds verified={verified} />} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
       <Route path="/profile" component={() => <Profile verified={verified} />} />
-      <Route exact path="/tag/:slug" component={Tags} />
+      <Route exact path="/tag/:slug" component={() => <Tags verified={verified} />} />
     </Switch>
   )
 } 

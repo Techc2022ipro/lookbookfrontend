@@ -36,7 +36,6 @@ const CreateProfile = () => {
     if(!upload) return "Something went worng";
     setBody(defaultProfileQuery);
     setSelectTag([]);
-    window.location.reload();
   }
 
   const getAllTags = async () => {

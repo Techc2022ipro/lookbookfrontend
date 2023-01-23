@@ -1,7 +1,7 @@
 import {Dispatch, SetStateAction} from "react"
 
 export type Product = {
-  pid: number
+  pid: string
   name: string
   brand: string
   description: string
@@ -15,7 +15,7 @@ export type Product = {
 }
 
 export type ProductModalType = {
-  pid: number
+  pid: string
   name: string
   brand: string
   description: string
@@ -33,7 +33,7 @@ export type LoginCredentials = {
 
 export type ProductCard = {
   uid: string
-  pid: number
+  pid: string
   username: string
   tags: string[]
   image: string
@@ -42,11 +42,11 @@ export type ProductCard = {
 }
 
 export type Profile = {
-  uid: number,
-  firstName: string,
-  lastName: string,
-  profilePic: string | null,
-  address: string | null,
-  phoneNo: string | null,
+  uid: string
+  firstName: string
+  lastName: string
+  profilePic: string | null
+  address: string | null
+  phoneNo: string | null
   tags: string[]
 }
