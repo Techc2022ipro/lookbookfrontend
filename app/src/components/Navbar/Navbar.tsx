@@ -20,7 +20,14 @@ const Navbar = () => {
       setUsername(res.data.username);
     } 
   });
-
+  const Username = () => {
+    if(username === "") return null;
+    return (
+      <h3 className="navbarUsername">
+          <Link to="/profile" className="link">{username}</Link>
+      </h3> 
+    )
+  };
 // this is to get the navbar DOM-element from the jsx below
 const toggle = document.querySelector(".navbar")
 
@@ -39,28 +46,31 @@ const handleLogout = async () => {
   window.location.reload();
 }
 
-const Username = () => {
-  if(username === "") return null;
-  return (
-    <h3 className="navbarUsername">
-        <Link to="/profile" className="link">{username}</Link>
-    </h3> 
-  )
-};
-
-const Logout = () => {
-  if(!verified) {
+const VerifiedNavbar = () => {
+  if (verified) {
     return (
-        <Link to="/login" className="link">Login</Link>
+      <>
+        <li className="navLink">
+          <Link to="/profile" className="link">Profile</Link>
+        </li>
+
+        <p className="link" onClick={handleLogout} >logout</p>
+      </>
     )
   }
   return (
-    <p className="link" onClick={handleLogout}>logout</p>
+        <li className="navLink" >
+          <Link to="/login" className="link">Login</Link>
+        </li>
   )
 }
 
-useEffect( () => {
-},[verified])
+const VerifiedSearchBar = () => {
+  if(verified) {
+    return <Searchbar />
+  } 
+  return null;
+}
 
 return (
   <Router>
@@ -80,7 +90,7 @@ return (
       <Username/>
 
       <div className="navItems">
-        <Searchbar />
+        <VerifiedSearchBar />
 
         <ul className="linkBox">
           <li className="navLink" >
@@ -89,9 +99,7 @@ return (
           <li className="navLink">
             <Link to="/feeds" className="link">Feeds</Link>
           </li>
-          <li className="navLink" >
-            <Logout />
-          </li>
+          <VerifiedNavbar />
         </ul>
       </div>
     </div>

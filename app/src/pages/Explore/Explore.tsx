@@ -3,7 +3,7 @@ import ProductCard from "../../common-components/ProductCard/ProductCard";
 import Requests, {Url} from "../../requests/Requests";
 import {Product} from "../../response-types/ResponseTypes";
 
-const Explore = () => {
+const Explore = (props: {verified:Boolean}) => {
 
   const [data, setData] = useState<Product[]>([]);
   const [verified, setVerified] = useState<Boolean>(false);
@@ -37,8 +37,13 @@ return (
       data.map(product => (
         <div key={product.pid}> 
           <ProductCard 
+<<<<<<< HEAD
             product={product}
             hasComment={verified}
+=======
+            product = {product}
+            hasComment={props.verified}
+>>>>>>> 77c4451 (page: profile settings added)
           />
           <br/>
         </div>
