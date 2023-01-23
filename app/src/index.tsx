@@ -9,10 +9,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-<<<<<<< HEAD
-=======
   <Navbar />
->>>>>>> 77c4451 (page: profile settings added)
    <App />
   </React.StrictMode>
 );
