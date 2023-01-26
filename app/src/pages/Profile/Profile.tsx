@@ -21,19 +21,32 @@ const Profile = (props: {verified: Boolean}) => {
     return (<Login path="/profile" />);
   }
 
+  if(!userProfile) {
+    return (
+      <CreateProfile />
+    )
+  }
+
+  const ProfilePic = () => {
+    if (!userProfile.profilePic) {
+      return (
+        <div className="sample-profile-pic"></div>
+      )
+    } else {
+      return (
+        <Image class="profile-pic" image={userProfile.profilePic} />
+      )
+    }
+  }
+
 
   return (
     <div>
-      {userProfile && userProfile.profilePic ? 
-      <Image class="profile-pic" image={userProfile.profilePic} /> 
-      : null 
-      }
-      {userProfile ?  
-        <div>
+      <ProfilePic />
+      <div>
         <p>{userProfile.firstName} {userProfile.lastName}</p>
         <p>{userProfile.phoneNo}</p>
-        </div>
-      : <CreateProfile />}
+      </div>
     </div>
   )
 }
