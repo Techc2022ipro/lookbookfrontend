@@ -125,6 +125,22 @@ code {
   right: 8px;
 }
 
+.spinner {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: -1;
+}
+
+.loading-text {
+  padding: 20px;
+}
+
 @keyframes fadein {
   from {
     opacity: 0;

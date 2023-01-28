@@ -4,18 +4,27 @@ import Login from "../../common-components/Login/Login";
 import CreateProfile from "../../components/CreateProfile/CreateProfile";
 import Requests, {Url} from "../../requests/Requests";
 import { Profile as UserProfile } from "../../response-types/ResponseTypes";
+import IsLoading from "../../common-components/IsLoading/IsLoading";
 
 const Profile = (props: {verified: Boolean}) => {
 
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+  const [isLoading, setIsLoading] = useState<Boolean>(true);
 
   const fetchProfile = async() => {
     const profile = await Requests.getWithCredentials(Url.AUTH, "profile");
     setUserProfile(profile);
+    setIsLoading(false);
   }
+
+
   useEffect(() => {
     fetchProfile();
   },[])
+
+  if(isLoading) {
+    return (<IsLoading />);
+  }
 
   if(!props.verified) {
     return (<Login path="/profile" />);
