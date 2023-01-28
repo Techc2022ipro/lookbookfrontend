@@ -126,7 +126,6 @@ code {
 }
 
 .spinner {
-  border: 1px black solid;
   position: absolute;
   top: 0;
   width: 100%;
