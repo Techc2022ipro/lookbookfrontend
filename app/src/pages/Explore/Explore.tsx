@@ -2,15 +2,18 @@ import {useEffect, useState} from "react";
 import Requests, {Url} from "../../requests/Requests";
 import {Product} from "../../response-types/ResponseTypes";
 import ProductCard from "../../common-components/ProductCard/ProductCard";
+import IsLoading from "../../common-components/IsLoading/IsLoading";
 
 const Explore = (props: {verified:Boolean}) => {
 
   const [data, setData] = useState<Product[]>([]);
   const [verified, setVerified] = useState<Boolean>(false);
+  const [isLoading, setIsLoading] = useState<Boolean>(true);
 
   const fetchData = async () => {
     const productData = await Requests.get(Url.PRODUCT, "");
     setData(productData);
+    setIsLoading(false);
   }
 
   const limitlessScrolling = async () => {
@@ -24,6 +27,9 @@ useEffect(() => {
   Requests.auth().then(res => setVerified(res.isVerified));
 },[verified])
 
+if(isLoading) {
+  return (<IsLoading />);
+}
 
 if(data.length <= 0) {
   return (
