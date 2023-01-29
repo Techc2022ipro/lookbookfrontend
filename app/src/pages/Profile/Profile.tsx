@@ -10,9 +10,12 @@ const Profile = (props: {verified: Boolean}) => {
 
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [isLoading, setIsLoading] = useState<Boolean>(true);
+  const [warn, setWarn] = useState();
 
   const fetchProfile = async() => {
-    const profile = await Requests.getWithCredentials(Url.AUTH, "profile");
+    const profile = await Requests.getWithCredentials(Url.AUTH, "profile").catch(warn => {
+      setWarn(warn);
+    });
     setUserProfile(profile);
     setIsLoading(false);
   }
@@ -32,7 +35,10 @@ const Profile = (props: {verified: Boolean}) => {
 
   if(!userProfile) {
     return (
-      <CreateProfile />
+      <div className="create-profile">
+        { warn }
+        <CreateProfile />
+      </div>
     )
   }
 

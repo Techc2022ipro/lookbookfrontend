@@ -1,0 +1,88 @@
+.product-card {
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+}
+
+.card {
+  width: 550px;
+  border: 1px solid #cfcfcf;
+  border-radius: 5px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  padding-top: 10px;
+  padding-left: 40px;
+}
+
+.product-info {
+  font-size: 12px;
+  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 50px;
+}
+
+.product-comment-bar {
+  display: flex;
+  margin-top: 30px;
+  align-items: center;
+  border-top: 1px solid #cfcfcf;
+}
+
+.product-send {
+  font-size: 25px;
+  cursor: pointer;
+  margin-left: 7px;
+}
+
+.product-comment {
+  width: 90%;
+  height: 40px;
+  border-bottom: none;
+  border-right: 1px solid #cfcfcf;
+  border-left: none;
+  border-top: none; 
+  padding-left: 10px;
+}
+
+.product-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.username {
+  padding-left: 20px;
+  text-transform: capitalize;
+  font-size: 20px;
+}
+
+.post-date {
+  font-size: 10px;
+  color: grey;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.card-profile-pic {
+  height: 84px;
+  width: 84px;
+  background-color: lightgrey;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.card-description {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size: 20px;
+}
+
+.tag {
+  padding: 2px;
+  text-decoration: none;
+  margin-top: 120px;
+}

@@ -8,6 +8,7 @@
 @import url('./components/SearchBar/Searchbar.css');
 @import url('./pages/Tags/Tags.css');
 @import url('./components/CreateProfile/CreateProfile.css');
+@import url('./pages/Profile/Profile.css');
 
 *{
   padding: 0;
