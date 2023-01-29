@@ -1,0 +1,33 @@
+.secondaryImg {
+  max-width: 50%;
+}
+
+.primaryImg {
+  max-width: 100%;
+}
+
+.profile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius:50%;
+  object-fit: cover;
+}
+
+.nav-profile-pic {
+  width: 100px;
+  border: 1px solid white;
+  height: 100px;
+  border-radius:50%;
+  object-fit: cover;
+}
+
+.navbar-profile-pic {
+  text-align: center;
+}
+
+.sample-profile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius:50%;
+  background-color: grey;
+}
