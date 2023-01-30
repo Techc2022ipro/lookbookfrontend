@@ -1,0 +1,36 @@
+.tag-box {
+    width: 260px !important;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 200px;
+    right: 20px;
+}
+
+.tag-title {
+    margin-bottom: 40px;
+}
+
+.tag-lists {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.tags {
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    width: 100px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    transition: 0.2s ease-in-out;
+    font-weight:bold;
+}
+
+.tags:hover {
+    background-color: grey;
+}
