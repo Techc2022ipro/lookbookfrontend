@@ -2,7 +2,6 @@
   z-index: 1;
 }
 
-
 .empty-data {
   height: 250px;
   font-size: 1.5em;
@@ -10,3 +9,4 @@
   justify-content: center;
   align-items: center;
 }
+

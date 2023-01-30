@@ -3,6 +3,7 @@ import Requests, {Url} from "../../requests/Requests";
 import {Product} from "../../response-types/ResponseTypes";
 import ProductCard from "../../common-components/ProductCard/ProductCard";
 import IsLoading from "../../common-components/IsLoading/IsLoading";
+import AllTags from "../../components/AllTags/AllTags";
 
 const Explore = (props: {verified:Boolean}) => {
 
@@ -39,6 +40,7 @@ if(data.length <= 0) {
 
 return (
   <div>
+      <AllTags />
     {
       data.map(product => (
         <div key={product.pid}> 

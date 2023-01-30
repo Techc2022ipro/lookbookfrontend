@@ -1,4 +1,5 @@
 @import url('./components/Navbar/Navbar.css');
+@import url('./components/AllTags/AllTags.css');
 @import url('./common-components/Image/Image.css');
 @import url('./common-components/Signup/Signup.css');
 @import url('./common-components/Login/Login.css');
