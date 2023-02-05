@@ -8,14 +8,20 @@ const Tags = (props:{verified:Boolean}) => {
   const  { slug }  = useParams() as { slug: string };
   const [data, setData] = useState<Product[]>([]);
 
+
+  useEffect(() => {
   const fetchData = async() => {
     const productData = await Requests.get(Url.PRODUCT, `tag/${slug}`);
     setData(productData);
   }
-
-  useEffect(() => {
     fetchData();
   }, [slug]);
+
+if(data.length <= 0) {
+  return (
+    <div className="empty-data"> Nothing to see here 🐔. </div>
+  )
+}
 
   return( 
     <div>
