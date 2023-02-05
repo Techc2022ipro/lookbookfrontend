@@ -50,6 +50,30 @@ const CreateProfile = () => {
   const handleChange = <P extends keyof ProfileQuery>(prop: P, value: ProfileQuery[P]) => {
     setBody({...body, [prop]: value});
     };
+
+  const SelectTags = () => {
+    if(selectTag.length < 3) {
+      return (
+        <div className="tag-box">
+          {
+            tags.map(tag => (
+              <div key={tag.tagid}>
+                <button className="select-tag" onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                  e.preventDefault();
+                  e.currentTarget.classList.toggle("disable-tag")
+                  e.currentTarget.disabled = true
+                  if (!selectTag.includes(tag.tag)) {
+                    setSelectTag(arr => [...arr, tag.tag]);
+                  }
+                }}>{tag.tag}</button>
+              </div>
+            ))
+          }
+        </div>
+      )
+    }
+    return null;
+  }
   
   return (
     <div className="from-section">
@@ -100,20 +124,26 @@ const CreateProfile = () => {
           onChange={(e:React.ChangeEvent<HTMLInputElement>) => {
             handleChange("phoneNo", e.target.value)
           }} />
-        <div className="tag-box">
+
+        <div>
+          <strong>Selected Tag:</strong> <br />
+          <p>You can only select three tags.</p>
           {
-            tags.map(tag => (
-              <div key={tag.tagid}>
-                <button className="select-tag" onClick={(e:React.MouseEvent<HTMLButtonElement>) => {
-                  e.preventDefault();
-                  setSelectTag(arr => [...arr, tag.tag]);
-                }}>{tag.tag}</button>
+            selectTag.map(tag => (
+              <div key={tag}>
+              <button className="selected-tag" onClick={
+                (e: React.MouseEvent<HTMLButtonElement>) => {
+                  e.preventDefault()
+                  selectTag.splice(selectTag.indexOf(tag), 1)
+                  e.currentTarget.classList.toggle("deselect-tag")
+                }
+              }># {tag}</button> <br />
               </div>
             ))
           }
         </div>
-
-        <Button type="submit" class="secondarBtn" value="Upload" />
+        <SelectTags />
+        <Button type="submit" class="secondaryBtn" value="Upload" />
       </form>
     </div>
   )

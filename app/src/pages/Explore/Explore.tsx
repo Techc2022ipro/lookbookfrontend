@@ -41,6 +41,7 @@ if(data.length <= 0) {
 return (
   <div>
       <AllTags />
+
     {
       data.map(product => (
         <div key={product.pid}> 

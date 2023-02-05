@@ -15,7 +15,7 @@ const Tags = (props:{verified:Boolean}) => {
 
   useEffect(() => {
     fetchData();
-  });
+  }, [slug]);
 
   return( 
     <div>

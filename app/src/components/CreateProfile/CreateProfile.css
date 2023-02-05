@@ -1,5 +1,43 @@
-.tag-box {
-  display: flex;
-  width: 80%;
-  justify-content: space-evenly;
+.select-tag {
+  all:unset;
+  border:1px solid black;
+  padding:15px;
+  width: 100px;
+  margin-top:5px;
+  margin-bottom:5px;
+  cursor: pointer;
+}
+
+.select-tag:hover{
+  background-color: black;
+  color: white;
+  transition: 0.2s ease-in-out;
+}
+
+.selected-button {
+  background-color: coral;
+}
+
+.selected-tag {
+  all: unset;
+  padding: 10px;
+}
+.selected-tag:hover {
+  background-color: black;
+  color: white;
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.selected-tag:visited {
+  display:none;
+}
+
+.deselect-tag {
+  display: none;
+}
+
+.disable-tag {
+  background: grey;
+  color: black;
 }
