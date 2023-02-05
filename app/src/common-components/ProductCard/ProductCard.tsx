@@ -31,17 +31,17 @@ const ProductCard = (props:{product: Product, hasComment: Boolean}) => {
     setComment("");
   }
 
+
+
+  useEffect(() => {
   const getProfilePic = async() => {
     const profile = await Requests.get(Url.AUTH, `profile/${props.product.uid}`)    
     if(profile) {
       setProfilePic(profile.profilePic);
     }
   }
-
-
-  useEffect(() => {
     getProfilePic();
-  }, [])
+  })
 
 
   return (
