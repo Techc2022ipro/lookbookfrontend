@@ -10,8 +10,8 @@ axios.interceptors.response.use(undefined, error=>{
 export enum Url { PRODUCT, AUTH };
 
 const baseUrl = (requestFor: Url): string => {
-    if(requestFor === Url.PRODUCT) return "http://localhost:2000/";
-    if(requestFor === Url.AUTH) return "http://localhost:8000/";
+    if(requestFor === Url.PRODUCT) return "http://prod-service:2000/";
+    if(requestFor === Url.AUTH) return "http://auth-service:1000/";
     return "invalid prop";
 }
 
