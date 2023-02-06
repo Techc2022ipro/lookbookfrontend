@@ -22,7 +22,7 @@ const Requests = {
     post: (url: Url, endpoint: string, body: {}) => axios.post(baseUrl(url) + endpoint, body, {withCredentials: true}).then(responseBody),
     patch: (url: Url, endpoint: string, body: {}) => axios.patch(baseUrl(url) + endpoint, body, {withCredentials: true, headers: {'Content-Type': 'multipart/form-data'}}).then(responseBody),
     delete: (url:string) => axios.delete(url).then(responseBody),
-    auth: () => axios.get("http://localhost:8000/isVerified", { withCredentials: true }).then(responseBody),
+    auth: () => axios.get("http://auth-service:1000/isVerified", { withCredentials: true }).then(responseBody),
     test: (url: string, body: {}) => axios.post(url,body).then(responseBody)
 }
 export default Requests;
