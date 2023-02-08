@@ -22,7 +22,8 @@
   margin-bottom: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
-  padding-left: 50px;
+  padding-left: 25px;
+  padding-right: 25px;
 }
 
 .product-comment-bar {
@@ -85,4 +86,17 @@
   padding: 2px;
   text-decoration: none;
   margin-top: 120px;
+}
+
+.comment-count {
+  color: grey;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  margin-top: 20px;
+}
+.comment-icon {
+  margin-right: 4px;
 }
