@@ -1,16 +1,19 @@
 import {Link} from "react-router-dom";
 import {ProductCard as Product} from "../../response-types/ResponseTypes"
 import Image from "../Image/Image";
-import { RiSendPlaneFill } from "react-icons/ri";
 import {useEffect, useState} from "react";
+import {isVerified} from "../../libs/Verified";
+import { RiSendPlaneFill } from "react-icons/ri";
 import Requests, {Url} from "../../requests/Requests";
 
-const ProductCard = (props:{product: Product, hasComment: Boolean}) => {
+const ProductCard = (props:{product: Product}) => {
+  const dateString = props.product.createdAt.toString().split("T")[0];
   const [comment, setComment] = useState<string>("");
   const [message, setMessage] = useState<string | null>("");
   const [error, setError] = useState<string | null>("");
-  const [profilePic, setProfilePic] = useState<string | null>("");
-  const dateString = props.product.createdAt.toString().split("T")[0];
+
+  useEffect(() => {
+  })
 
   const handleSubmit = async() => {
     const data = {
@@ -19,47 +22,51 @@ const ProductCard = (props:{product: Product, hasComment: Boolean}) => {
       comment
     };
 
-    const addComment = await Requests.post(Url.PRODUCT, "comment", data).catch(err => {
-      setMessage(null);
-      setError(err);
-    });
+    const addComment = await Requests.post(Url.PRODUCT, "/comment", data)
 
-    if(addComment.message !== "") {
-      setError(null);
-      setMessage(addComment.message);
+    if(!addComment.data){
+      setError(addComment.message);
     }
-    setComment("");
+
+    if(addComment.data) {
+      setMessage(addComment.data.message)
+      setComment("");
+    }
+  }
+
+  const Message = () => {
+    if(message) {
+      return (
+        <p className="message-banner">
+          <strong onClick={()=>{setMessage(null);}} className="close-banner">x</strong>
+          {message}
+        </p> 
+      )
+    }
+    return null;
   }
 
 
-
-  useEffect(() => {
-  const getProfilePic = async() => {
-    const profile = await Requests.get(Url.AUTH, `profile/${props.product.uid}`)    
-    if(profile) {
-      setProfilePic(profile.profilePic);
-    }
+  const Error = () => {
+    if(error) {
+    return(
+      <p className="warning-banner">
+        <strong onClick={()=>{setError(null);}} className="close-banner">x</strong>  
+        {error}
+      </p> 
+    )
   }
-    getProfilePic();
-  })
-
+  return null;
+  }
 
   return (
     <div className="product-card productSection">
-      {error ? <p className="warning-banner">
-        <strong onClick={()=>{setError(null);}} className="close-banner">x</strong>  
-        {error}
-      </p>: null} 
-
-      {message ? <p className="message-banner">
-        <strong onClick={()=>{setMessage(null);}} className="close-banner">x</strong>
-        {message}
-      </p>: null} 
+      <Error />
+      <Message />
 
       <div className="card">
-
         <div className="user-info">
-          {profilePic ? <Image class="card-profile-pic" image={profilePic} /> : <div className="card-profile-pic"></div>}
+          <div className="card-profile-pic"></div>
           <strong className="username">{props.product.username}</strong>
 
         </div>
@@ -82,7 +89,7 @@ const ProductCard = (props:{product: Product, hasComment: Boolean}) => {
           />
         </div>
     </Link>
-        {props.hasComment ? 
+        {isVerified() ? 
           <div className="product-comment-bar">
             <input 
               value={comment}
@@ -103,5 +110,4 @@ const ProductCard = (props:{product: Product, hasComment: Boolean}) => {
     </div>
   )
 }
-
 export default ProductCard

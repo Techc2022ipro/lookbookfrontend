@@ -1,1 +1,6 @@
-./app/package-lock.json
+/app/.env
+/app/.env.development
+/app/.env.production
+/app/node_modules
+swap-pane
+

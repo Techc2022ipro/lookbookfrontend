@@ -7,6 +7,7 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/axios": "^0.14.0",
+    "@types/http-proxy-middleware": "^1.0.0",
     "@types/jest": "^27.5.2",
     "@types/js-cookie": "^3.0.2",
     "@types/node": "^16.11.47",
@@ -16,6 +17,7 @@
     "@types/react-icons": "^3.0.0",
     "@types/react-overlays": "^3.1.0",
     "axios": "^0.27.2",
+    "http-proxy-middleware": "^2.0.6",
     "js-cookie": "^3.0.1",
     "react": "^18.2.0",
     "react-cookie": "^4.1.1",
@@ -29,7 +31,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "NODE_ENV=development react-scripts start",
+    "start-prod": "NODE_ENV=production react-scripts start",
+    "build-dev": "NODE_ENV=development react-scripts build",
+    "build-prod": "NODE_ENV=production react-scripts build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

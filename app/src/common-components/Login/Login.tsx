@@ -1,17 +1,15 @@
-import React, {useEffect,useState} from "react";
+import React, {useState} from "react";
+import IsLoading from "../../common-components/IsLoading/IsLoading";
 import {Link, Redirect} from "react-router-dom";
-import Requests,{Url}  from "../../requests/Requests";
+import {isVerified} from "../../libs/Verified";
+import Requests, {Url} from "../../requests/Requests";
 import Button from "../customHtmlComponents/Button/Button";
 
-const Login = (props: {path: string}) => {
-  const [verified, setVerified] = useState<Boolean>(false);
+const Login = () => {
   const [identifier, setIdentifier] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => {
-    Requests.auth().then(res => setVerified(res.isVerified));
-  }, [verified]);
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
 
   const handleIdentifier = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIdentifier(e.target.value);
@@ -22,25 +20,33 @@ const Login = (props: {path: string}) => {
   }
 
   const loginAction = async() => {
-    await Requests.post(Url.AUTH, "login" , {
-      identifier, 
+    const login = await Requests.post(Url.AUTH, "login", {
+      identifier,
       password
     });
+    setIsLoading(true);
+    if(!login.data) {
+      setError(login.message)
+    };
+
+    if(login.data) {
+      sessionStorage.setItem("username", login.data.username);
+      sessionStorage.setItem("uid", login.data.uid);
+      setIsLoading(false);
+    }
     window.location.reload();
-  }  
+  }
 
   const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await loginAction().catch(err => {setError(err)});
+    loginAction();
   }
 
-  if(verified && error === null) {
-    if (props.path === undefined) {
-      return (<Redirect to={"/"} />);
-    } else {
-      return (<Redirect to={props.path} />);
-    }
-  }  
+  if(isLoading) return (<IsLoading />);
+
+  if(isVerified()) {
+    return (<Redirect to={"/"} />);
+  }
 
 return (
     <div className="form-section">
