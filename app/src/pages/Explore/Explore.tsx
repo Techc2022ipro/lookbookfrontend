@@ -45,7 +45,9 @@ return (
   <div>
     {
       products.map(item => (
+        <div key={item.pid}>
         <ProductCard product={item} />
+        </div>
       ))
     }
   </div>

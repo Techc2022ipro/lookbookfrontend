@@ -23,7 +23,11 @@ const Requests = {
     if(err.request) return err.request;
     if(err.response) return err.response;
   }),
-    getWithCredentials: (url: Url, endpoint: string) => axios.get(baseUrl(url) + endpoint, { withCredentials: true }),
+    getWithCredentials: (url: Url, endpoint: string) => axios.get(baseUrl(url) + endpoint, { withCredentials: true }).catch(err => {
+      if(err) return err;
+      if(err.request) return err.request;
+      if(err.response) return err.response;
+    }),
     postWithImage: (url: Url, endpoint: string, body: {}) => axios.post(baseUrl(url) + endpoint, body, {withCredentials: true, headers: {'Content-Type': 'multipart/form-data'}}),
     post: (url: Url, endpoint: string, body: {}) => axios.post(baseUrl(url) + endpoint, body, {withCredentials: true}).catch(err => {
       if(err) return err;
