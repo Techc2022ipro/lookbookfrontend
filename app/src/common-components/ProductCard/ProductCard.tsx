@@ -4,6 +4,7 @@ import Image from "../Image/Image";
 import {useEffect, useState} from "react";
 import {isVerified} from "../../libs/Verified";
 import { RiSendPlaneFill } from "react-icons/ri";
+import { FaCommentAlt } from "react-icons/fa";
 import Requests, {Url} from "../../requests/Requests";
 
 const ProductCard = (props:{product: Product}) => {
@@ -89,6 +90,7 @@ const ProductCard = (props:{product: Product}) => {
           />
         </div>
     </Link>
+        <p className="comment-count"><FaCommentAlt  className="comment-icon" />{props.product.comment.length}</p>
         {isVerified() ? 
           <div className="product-comment-bar">
             <input 

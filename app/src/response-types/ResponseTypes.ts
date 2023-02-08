@@ -1,5 +1,11 @@
 import {Dispatch, SetStateAction} from "react"
 
+export type Comment = {
+  cid: number
+  uid: number
+  pid: number
+  comment: string[]
+}
 export type Product = {
   pid: string
   name: string
@@ -8,6 +14,7 @@ export type Product = {
   quantity: string
   price: string
   uid: string
+  comment: Comment[]
   username: string
   image: string
   tags: string[]
@@ -37,6 +44,7 @@ export type ProductCard = {
   username: string
   tags: string[]
   image: string
+  comment: Comment[]
   description: string
   createdAt: Date
 }
