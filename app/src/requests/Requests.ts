@@ -34,5 +34,6 @@ const Requests = {
     delete: (url:string) => axios.delete(url),
     auth: () => axios.get(authUrl, { withCredentials: true }),
     test: (url: string, body: {}) => axios.post(url,body)
+
 }
 export default Requests;
