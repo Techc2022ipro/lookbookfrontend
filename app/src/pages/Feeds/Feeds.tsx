@@ -1,7 +1,8 @@
 import Login from "../../common-components/Login/Login";
+import {isVerified} from "../../libs/Verified";
 
 const Feeds = () => {
-  if(!sessionStorage.getItem('username')) {
+  if(!isVerified()) {
     return (<Login />)
   }
 

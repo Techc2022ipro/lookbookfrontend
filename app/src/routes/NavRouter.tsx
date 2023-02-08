@@ -14,7 +14,7 @@ const NavRouter = () => {
       <Route path="/feeds" component={Feeds} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
-      <Route path="/signup" component={Profile} />
+      <Route path="/profile" component={Profile} />
       <Route path="/tag/:slug" component={Tags} />
 
     </Switch>

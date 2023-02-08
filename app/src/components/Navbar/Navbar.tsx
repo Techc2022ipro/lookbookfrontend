@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import NavRouter from "../../routes/NavRouter";
 import {GiHamburgerMenu} from "react-icons/gi";
 import {FaRegWindowClose} from "react-icons/fa";
-import {isVerified, logout} from "../../libs/Verified";
+import {isVerified, logout, Verified} from "../../libs/Verified";
 import Requests, {Url} from "../../requests/Requests";
+import Image from "../../common-components/Image/Image";
 
 const Navbar = () => {
 
@@ -24,7 +25,7 @@ const Navbar = () => {
   }
 
    const handleLogout = async () => {
-    await Requests.getWithCredentials(Url.AUTH, "logout");
+    await Requests.getWithCredentials(Url.AUTH, "/logout");
     logout();
     window.location.reload();
   }
@@ -47,6 +48,17 @@ const Navbar = () => {
       </li>
     )
   }
+
+  const ProfilePic = () => {
+    if(Verified.profilePic){
+      return (
+        <div className="navbar-profile-pic">
+          <Image image={Verified.profilePic} class="nav-profile-pic" />;
+        </div>
+      )
+    } 
+    return null;
+  }
   useEffect(() => {
   }, [])
 
@@ -67,7 +79,8 @@ const Navbar = () => {
         />
 
         <div className="navItems">
-
+          <ProfilePic />
+          <strong className="navbarUsername">{Verified.username}</strong>
           <ul className="linkBox">
             <li className="navLink" >
               <Link to="/" className="link">Explore</Link>

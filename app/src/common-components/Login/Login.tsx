@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import IsLoading from "../../common-components/IsLoading/IsLoading";
 import {Link, Redirect} from "react-router-dom";
-import {isVerified} from "../../libs/Verified";
+import {isVerified, Verified} from "../../libs/Verified";
 import Requests, {Url} from "../../requests/Requests";
 import Button from "../customHtmlComponents/Button/Button";
 
@@ -20,7 +20,7 @@ const Login = () => {
   }
 
   const loginAction = async() => {
-    const login = await Requests.post(Url.AUTH, "login", {
+    const login = await Requests.post(Url.AUTH, "/login", {
       identifier,
       password
     });
@@ -34,6 +34,17 @@ const Login = () => {
       sessionStorage.setItem("uid", login.data.uid);
       setIsLoading(false);
     }
+
+      const profile = await Requests.getWithCredentials(Url.AUTH, `/profile/${login.data.uid}`)
+      setIsLoading(true)
+      if(!profile.data) {
+        setError('User Profile is not set');
+        setIsLoading(false);
+      }
+      if(profile.data) {
+        sessionStorage.setItem('profilePic', profile.data.profilePic);
+        setIsLoading(false);
+      }
     window.location.reload();
   }
 

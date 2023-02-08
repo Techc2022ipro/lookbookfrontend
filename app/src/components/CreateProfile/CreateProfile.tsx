@@ -16,10 +16,10 @@ const CreateProfile = () => {
   const [image, setImage] = useState<FileList>();
   const [tags, setTags] = useState<Tags[]>([]);
   const [selectTag, setSelectTag] = useState<string[]>([]);
+  const [error, setError] = useState<string | null>("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData();
+    e.preventDefault(); const formData = new FormData();
     formData.append("firstName", body.firstName);
     formData.append("lastName", body.lastName);
     if(body.address) {
@@ -32,15 +32,20 @@ const CreateProfile = () => {
       formData.append("profilePic", image[0])
     }
     selectTag.forEach(tag => formData.append("tags", tag));
-    const upload = await Requests.postWithImage(Url.AUTH, "profile", formData);
+    const upload = await Requests.postWithImage(Url.AUTH, "/profile", formData);
     if(!upload) return "Something went worng";
     setBody(defaultProfileQuery);
     setSelectTag([]);
   }
 
   const getAllTags = async () => {
-    const allTags = await Requests.get(Url.PRODUCT, "tags");
-    setTags(allTags);
+    const allTags = await Requests.get(Url.PRODUCT, "/tags");
+    if(!allTags.data) {
+      setError(allTags.message);
+    }
+    if(allTags.data) {
+      setTags(allTags.data)
+    }
   }
 
   useEffect(() => {
@@ -74,9 +79,22 @@ const CreateProfile = () => {
     }
     return null;
   }
+
+  const Error = () => {
+    if(error) {
+    return(
+      <p className="warning-banner">
+        <strong onClick={()=>{setError(null);}} className="close-banner">x</strong>  
+        {error}
+      </p> 
+    )
+  }
+  return null;
+  }
   
   return (
     <div className="from-section">
+      <Error />
       <form className="login-form" onSubmit={handleSubmit} encType="multipart/form-data">
         <input
           type="file"
