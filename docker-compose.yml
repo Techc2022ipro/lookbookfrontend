@@ -11,4 +11,6 @@ services:
       - ./app:/app
     environment:
       NODE_ENV: development
+    env_file:
+      - ./app/.env.development
     tty: true

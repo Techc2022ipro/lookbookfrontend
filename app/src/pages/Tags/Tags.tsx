@@ -3,41 +3,60 @@ import {useParams} from "react-router-dom";
 import ProductCard from "../../common-components/ProductCard/ProductCard";
 import Requests, {Url} from "../../requests/Requests";
 import {Product} from "../../response-types/ResponseTypes";
+import IsLoading from "../../common-components/IsLoading/IsLoading";
+import ErrorComponent from "../../common-components/ErrorComponent/ErrorComponent"
 
-const Tags = (props:{verified:Boolean}) => {
+const Tags = () => {
   const  { slug }  = useParams() as { slug: string };
-  const [data, setData] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState<Boolean>(true);
+  const [products, setProducts] = useState<Product[]>();
+  const [error, setError] = useState<string>();
 
 
   useEffect(() => {
-  const fetchData = async() => {
-    const productData = await Requests.get(Url.PRODUCT, `tag/${slug}`);
-    setData(productData);
+  const getProducts = async() => {
+    const products = await Requests.get(Url.PRODUCT, `/tag/${slug}`);
+    
+    if(!products.data) {
+      setError(products.message)
+    };
+    setProducts(products.data);
+
+    if(products){
+      setIsLoading(false);
+    }
   }
-    fetchData();
-  }, [slug]);
+    getProducts()
+  }, [slug])
 
-if(data.length <= 0) {
-  return (
-    <div className="empty-data"> Nothing to see here 🐔. </div>
-  )
-}
+  if(isLoading) {
+    return (<IsLoading />);
+  }
+  if(error) {
+    return (
+    <ErrorComponent error={error} />
+    )
+  }
 
-  return( 
-    <div>
-      <strong className="sub-title">Filtered by: {slug}</strong>
-      {
-        data.map(product => (
-          <div key={product.pid}>
-            <ProductCard
-              product={product}
-              hasComment={props.verified}
-            />
-          </div>
-        ))
-      }
-    </div>
-  )
+  if(!products) {
+    return (
+      <div className="empty-data"> Nothing to see here 🐔. </div>
+    )
+  } 
+
+return (
+  <div>
+    <strong className="sub-title">Filtered by: {slug}</strong>
+
+    {
+      products.map(item => (
+        <div key={item.pid}>
+        <ProductCard product={item} />
+        </div>
+      ))
+    }
+  </div>
+)
 }
 
 export default Tags;

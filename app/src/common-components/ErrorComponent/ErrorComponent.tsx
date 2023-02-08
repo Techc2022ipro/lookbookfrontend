@@ -1,16 +1,7 @@
-import {useState} from "react";
-
-const ErrorComponent = (props:{message: string}) => {
-
-  const [errors, setErrors] = useState<string>("")
-
-  if (props.message === "login error") {
-    setErrors("Wrong Username/Password.")
-  }
-
+const ErrorComponent = (props:{error: string}) => {
   return (
-    <div>
-      <p>{errors}</p>
+    <div className="error-banner">
+      <p>{props.error}</p>
     </div>
   )
 }
