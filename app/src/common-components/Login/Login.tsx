@@ -34,19 +34,22 @@ const Login = () => {
       sessionStorage.setItem("username", login.data.username);
       sessionStorage.setItem("uid", login.data.uid);
       setIsLoading(false);
-    }
 
       const profile = await Requests.getWithCredentials(Url.AUTH, `/profile/${login.data.uid}`)
+
       setIsLoading(true)
+
       if(!profile.data) {
         setError('User Profile is not set');
         setIsLoading(false);
       }
+
       if(profile.data) {
         sessionStorage.setItem('profilePic', profile.data.profilePic);
         setIsLoading(false);
       }
-    window.location.reload();
+      window.location.reload();
+    }
   }
 
   const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {

@@ -53,7 +53,7 @@ const Navbar = () => {
     if(Verified.profilePic){
       return (
         <div className="navbar-profile-pic">
-          <Image image={Verified.profilePic} class="nav-profile-pic" />;
+          <Image image={Verified.profilePic} class="nav-profile-pic" />
         </div>
       )
     } 

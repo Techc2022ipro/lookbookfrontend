@@ -5,16 +5,20 @@ import {useEffect, useState} from "react";
 import {isVerified} from "../../libs/Verified";
 import { RiSendPlaneFill } from "react-icons/ri";
 import { FaCommentAlt } from "react-icons/fa";
+import { FcLike } from "react-icons/fc";
 import Requests, {Url} from "../../requests/Requests";
 
 const ProductCard = (props:{product: Product}) => {
   const dateString = props.product.createdAt.toString().split("T")[0];
   const [comment, setComment] = useState<string>("");
+  const [commentCount, setCommentCount] = useState<number>(props.product.comment.length)
   const [message, setMessage] = useState<string | null>("");
   const [error, setError] = useState<string | null>("");
+  const [likes, setLikes] = useState<number>(props.product.likes)
+
 
   useEffect(() => {
-  })
+  },[likes, commentCount])
 
   const handleSubmit = async() => {
     const data = {
@@ -31,6 +35,7 @@ const ProductCard = (props:{product: Product}) => {
 
     if(addComment.data) {
       setMessage(addComment.data.message)
+      setCommentCount(commentCount + 1)
       setComment("");
     }
   }
@@ -59,6 +64,7 @@ const ProductCard = (props:{product: Product}) => {
   }
   return null;
   }
+
 
   return (
     <div className="product-card productSection">
@@ -90,7 +96,13 @@ const ProductCard = (props:{product: Product}) => {
           />
         </div>
     </Link>
-        <p className="comment-count"><FaCommentAlt  className="comment-icon" />{props.product.comment.length}</p>
+        <div className="product-card-utilbox">
+          {isVerified() ? <p><FcLike className="likes" onClick={ async () => {
+            await Requests.get(Url.PRODUCT, `/product/addlikes/${props.product.pid}`)
+            setLikes(likes+1)
+          }} />{likes}</p> : null}
+          <p className="comment-count"><FaCommentAlt  className="comment-icon" />{commentCount}</p>
+        </div>
         {isVerified() ? 
           <div className="product-comment-bar">
             <input 

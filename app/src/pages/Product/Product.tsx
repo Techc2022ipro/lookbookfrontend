@@ -1,10 +1,12 @@
 import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import Requests, {Url} from "../../requests/Requests";
 import {Product as ProductData} from "../../response-types/ResponseTypes";
 import IsLoading from "../../common-components/IsLoading/IsLoading";
 import {DateToStr} from "../../libs/datetostring";
 import Image from "../../common-components/Image/Image";
+import { FcLike } from "react-icons/fc";
+import {isVerified} from "../../libs/Verified";
 
 const Product = () => {
 
@@ -12,6 +14,7 @@ const Product = () => {
   const [product, setProduct] = useState<ProductData>();
   const [isLoading, setIsLoading] = useState<Boolean>(true);
   const [error, setError] = useState<string | null>();
+  const [likes, setLikes] = useState<number>()
 
   const getProductData = async() => {
     const product = await Requests.get(Url.PRODUCT, `/product/${pid}`);
@@ -20,6 +23,7 @@ const Product = () => {
     }
     if(product.data) {
       setProduct(product.data);
+      setLikes(product.data.likes);
       setIsLoading(false);
     }
   }
@@ -38,7 +42,7 @@ const Product = () => {
 
   useEffect(() => {
     getProductData();
-  }, [])
+  }, [likes])
 
 
 
@@ -47,6 +51,26 @@ const Product = () => {
       <div className="empty-data"> Nothing to see here 🐔. </div>
     )
   } 
+
+  const Likes = () => {
+    if(isVerified()) {
+      return (
+        <p className="product-likes">
+        <FcLike className="product-likes-icon" 
+          onClick={ async () => {
+            await Requests.get(Url.PRODUCT, `/product/addlikes/${product.pid}`)
+            setLikes(likes ? likes+1 : 0);
+          }}
+          />
+        <strong className="product-likes-count">
+        {product.likes}
+        </strong>
+        </p>
+      )
+    }
+    return null;
+  }
+
 
   if(isLoading) return (<IsLoading />);
 
@@ -57,12 +81,21 @@ const Product = () => {
         <Image image={product.image} class="primary-image" />
       </div>
       <div className="product-detail">
-      <h3 className="product-title">{product.name}</h3>
-      <p className="product-description">{product.description}</p>
-      <p className="product-posted-date">Posted-at: {DateToStr(product.createdAt)}</p>
+        <h3 className="product-title">{product.name}</h3>
+        <h2 className="product-brand"><strong>Brand: </strong>{product.brand}</h2>
+        <div className="product-tag-div">
+          {
+            product.tags.map(tag => (
+              <Link to={`/tag/${tag}`} className="product-tag" key={tag + product.pid}>#{tag}</Link>
+            ))
+          }
+        </div>
+        <p className="product-description">{product.description}</p>
+        <p className="product-posted-date">Posted-at: {DateToStr(product.createdAt)}</p>
         <p className="product-price"><strong>Price:</strong> ${product.price}</p>
         <p className="product-quantity"><strong>Quantity:</strong>{product.quantity}</p>
-    </div>
+        <Likes />
+      </div>
     </div>
   )
 }

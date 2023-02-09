@@ -13,8 +13,7 @@
 .product-detail {
   width: 40%;
   height: 70%;
-  padding-left: 20px;
-}
+  padding-left: 20px; }
 
 .product-title {
   text-align: start;
@@ -22,6 +21,14 @@
   padding-bottom: 10px;
   color: rgba(0, 0, 0, 0.7);
   font-size: 1.5em;
+}
+
+.product-brand {
+  text-align: start;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 0.9em;
 }
 
 .product-description {
@@ -54,4 +61,36 @@
 .product-quantity {
   color:grey;
   padding-top: 10px;
+}
+
+.product-tag-div {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.product-tag {
+  font-size: 0.9em;
+  text-decoration: none;
+  padding-left: 2.5px;
+  padding-right: 2.5px;
+}
+
+.product-likes {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.product-likes-icon {
+  font-size: 40px;
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.product-likes-icon:hover {
+  transform: scale(1.2);
+}
+
+.product-likes-count {
+  font-size: 17px;
+  color: rgba(0, 0, 0, 0.7);
 }
