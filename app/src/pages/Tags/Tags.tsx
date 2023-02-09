@@ -2,14 +2,14 @@ import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import ProductCard from "../../common-components/ProductCard/ProductCard";
 import Requests, {Url} from "../../requests/Requests";
-import {Product} from "../../response-types/ResponseTypes";
 import IsLoading from "../../common-components/IsLoading/IsLoading";
 import ErrorComponent from "../../common-components/ErrorComponent/ErrorComponent"
+import {Product} from "../../response-types/ResponseTypes";
 
 const Tags = () => {
   const  { slug }  = useParams() as { slug: string };
   const [isLoading, setIsLoading] = useState<Boolean>(true);
-  const [products, setProducts] = useState<Product[]>();
+  const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState<string>();
 
 
@@ -20,9 +20,8 @@ const Tags = () => {
     if(!products.data) {
       setError(products.message)
     };
-    setProducts(products.data);
-
     if(products){
+      setProducts(products.data);
       setIsLoading(false);
     }
   }
@@ -47,7 +46,6 @@ const Tags = () => {
 return (
   <div>
     <strong className="sub-title">Filtered by: {slug}</strong>
-
     {
       products.map(item => (
         <div key={item.pid}>

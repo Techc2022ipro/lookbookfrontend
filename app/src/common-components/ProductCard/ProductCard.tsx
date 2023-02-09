@@ -83,7 +83,7 @@ const ProductCard = (props:{product: Product}) => {
           <p className="post-date">Posted at:{dateString}</p>
         </div>
       <Link to={`/product/${props.product.pid}`}>
-        <div className="product-image">
+        <div className="product-card-image">
           <Image 
             image={props.product.image}
             class="primaryImg" 

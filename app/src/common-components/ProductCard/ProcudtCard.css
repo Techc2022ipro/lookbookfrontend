@@ -49,7 +49,7 @@
   padding-left: 10px;
 }
 
-.product-image {
+.product-card-image {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -96,7 +96,9 @@
   justify-content: center;
   height: 20px;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
+
 .comment-icon {
   margin-right: 4px;
 }
