@@ -10,11 +10,17 @@
 @import url('./pages/Tags/Tags.css');
 @import url('./components/CreateProfile/CreateProfile.css');
 @import url('./pages/Profile/Profile.css');
+@import url('./pages/Feeds/Feeds.css');
+@import url('./pages/Profile/Profile.css');
 @import url('./pages/Product/Product.css');
 
 *{
   padding: 0;
   margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
