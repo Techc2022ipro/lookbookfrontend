@@ -38,7 +38,7 @@ const Profile = () => {
   if(!profile) return <CreateProfile />;
 
   const ProfilePic = () => {
-    if(profile.profilePic) return <Image image={profile.profilePic} class="card-profile-pic" />
+    if(profile.profilePic) return <Image image={profile.profilePic} class="profiles-profile-pic" />
     return <div className="card-profile-pic"></div>
   }
 
@@ -48,13 +48,12 @@ const Profile = () => {
   }
 
   return (
-    <div>
+    <div className="profile-div">
       <div>
         <Error />
         <ProfilePic />
-        <p>{profile.firstName} </p>
-        <p>{profile.lastName} </p>
-        <p>{profile.address ? profile.address : 'n/a'} </p>
+        <p className="profile-user">{profile.firstName} {profile.lastName} </p>
+        <p className="profile-address">{profile.address ? profile.address : 'n/a'} </p>
         <p>{profile.phoneNo ? profile.phoneNo : 'n/a'} </p>
       </div>
     </div>

@@ -90,27 +90,42 @@
 
 .likes {
   cursor: pointer;
+  margin-right: 5px;
   transition: 0.2s ease-in-out;
+  font-size: 2em;
 }
 
 .likes:hover {
-  transform: scale(1.5);
+  transform: scale(1.2);
 }
 
+
 .comment-count {
-  padding:2px;
-  margin-left: 5px;
-  color: grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.likes-count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .comment-icon {
-  margin-right: 4px;
+  cursor: pointer;
+  margin-right: 5px;
+  margin-left: 15px;
+  transition: 0.2s ease-in-out;
+  font-size: 1.6em;
+  color:brown;
 }
 
 .product-card-utilbox{
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
 }

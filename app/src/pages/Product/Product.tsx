@@ -21,6 +21,7 @@ const Product = () => {
     if(!product.data) {
       setError(product.message);
     }
+
     if(product.data) {
       setProduct(product.data);
       setLikes(product.data.likes);

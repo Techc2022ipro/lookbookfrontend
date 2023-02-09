@@ -97,7 +97,7 @@ const ProductCard = (props:{product: Product}) => {
         </div>
     </Link>
         <div className="product-card-utilbox">
-          {isVerified() ? <p><FcLike className="likes" onClick={ async () => {
+          {isVerified() ? <p className="likes-count"><FcLike className="likes" onClick={ async () => {
             await Requests.get(Url.PRODUCT, `/product/addlikes/${props.product.pid}`)
             setLikes(likes+1)
           }} />{likes}</p> : null}
