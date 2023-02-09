@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import IsLoading from "../../common-components/IsLoading/IsLoading";
 import {Link, Redirect} from "react-router-dom";
-import {isVerified, Verified} from "../../libs/Verified";
+import {isVerified} from "../../libs/Verified";
 import Requests, {Url} from "../../requests/Requests";
 import Button from "../customHtmlComponents/Button/Button";
 
@@ -26,6 +26,7 @@ const Login = () => {
     });
     setIsLoading(true);
     if(!login.data) {
+      setIsLoading(false);
       setError(login.message)
     };
 
@@ -53,11 +54,9 @@ const Login = () => {
     loginAction();
   }
 
-  if(isLoading) return (<IsLoading />);
+  if(isLoading) return <IsLoading />;
 
-  if(isVerified()) {
-    return (<Redirect to={"/"} />);
-  }
+  if(isVerified()) return <Redirect to={"/"} />;
 
 return (
     <div className="form-section">

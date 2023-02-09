@@ -25,9 +25,7 @@ const Explore = () => {
     getProducts()
   }, [])
 
-  if(isLoading) {
-    return (<IsLoading />);
-  }
+  if(isLoading) return (<IsLoading />);
 
   if(error) {
     return (
