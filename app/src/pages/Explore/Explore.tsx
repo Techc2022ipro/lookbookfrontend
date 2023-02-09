@@ -13,7 +13,7 @@ const Explore = () => {
   const getProducts = async() => {
     const products = await Requests.get(Url.PRODUCT, "/");
     if(!products.data) {
-      setError(products.message)
+      setError(products.message);
     };
     setProducts(products.data);
     if(products){
@@ -53,3 +53,4 @@ return (
 }
 
 export default Explore
+

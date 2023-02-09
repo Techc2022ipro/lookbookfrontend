@@ -19,6 +19,7 @@ export type Product = {
   image: string
   tags: string[]
   createdAt: Date
+  likes: number
 }
 
 export type ProductModalType = {
@@ -45,6 +46,7 @@ export type ProductCard = {
   tags: string[]
   image: string
   comment: Comment[]
+  likes: number
   description: string
   createdAt: Date
 }
